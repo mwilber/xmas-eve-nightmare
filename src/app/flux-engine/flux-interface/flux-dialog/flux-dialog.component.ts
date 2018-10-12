@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { DialogService } from '../../services/dialog.service';
 import { Dialog } from '../../interfaces/dialog';
 
@@ -19,6 +19,14 @@ export class FluxDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    //this.Refresh();
+  }
+
+  ngOnChanges(){
+    this.Refresh();
+  }
+
+  Refresh(){
     this.activeDialog = this.conversations[this.selectedCharacter];
   }
 

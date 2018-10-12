@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { LocationService } from '../services/location.service';
 import { Location } from '../interfaces/location'
 import { DialogService } from '../services/dialog.service';
+import { FluxDialogComponent } from './flux-dialog/flux-dialog.component';
 
 @Component({
   selector: 'flux-interface',
@@ -11,6 +12,9 @@ import { DialogService } from '../services/dialog.service';
 })
 export class FluxInterfaceComponent implements OnInit {
 
+  @ViewChild(FluxDialogComponent)
+    private dialogComponant: FluxDialogComponent;
+  
   currentScene: { location: any, conversations: any[] };
 
   constructor(
@@ -45,6 +49,9 @@ export class FluxInterfaceComponent implements OnInit {
 
     // Build the dialog tree
     this.currentScene.conversations = this.dialogService.GetActiveDialogForUserState(this.userService.GetUserState());
+    // if(this.dialogComponant){
+    //   this.dialogComponant.Refresh();
+    // }
 
     console.log('currentScene', this.currentScene);
   }
