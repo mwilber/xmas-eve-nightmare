@@ -1,3 +1,9 @@
 <p *ngIf="activeDialog.hasOwnProperty('content')">
   {{activeDialog.content}}
 </p>
+<div class="character-list">
+  <button 
+      *ngFor="let characterAlias of availableCharacters"
+      (click)="SetActiveCharacter(characterAlias)"
+  >{{characterAlias}}</button>
+</div>

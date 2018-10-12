@@ -12,22 +12,42 @@ export class FluxDialogComponent implements OnInit {
   @Input() conversations;
   selectedCharacter: string;
   activeDialog: Dialog;
+  availableCharacters: string[];
 
   constructor() {
-    this.selectedCharacter = 'narrator';
+    this.selectedCharacter = '';
     this.activeDialog = null;
   }
 
   ngOnInit() {
-    //this.Refresh();
+    
   }
 
   ngOnChanges(){
-    this.Refresh();
+    console.log('NG ON CHANGES');
+    this.selectedCharacter = 'narrator';
+    this.RefreshDialog();
+    this.RefreshCharacters();
   }
 
-  Refresh(){
+  RefreshCharacters(){
+    this.availableCharacters = [];
+    let characterProps = Object.keys(this.conversations);
+    for (let prop of characterProps) { 
+      if(this.conversations.hasOwnProperty(prop)){
+        this.availableCharacters.push(prop);
+      }
+    }
+  }
+
+  RefreshDialog(){
+    // Get active dialog
     this.activeDialog = this.conversations[this.selectedCharacter];
+  }
+
+  SetActiveCharacter(alias: string){
+    this.selectedCharacter = alias;
+    this.RefreshDialog();
   }
 
 }
