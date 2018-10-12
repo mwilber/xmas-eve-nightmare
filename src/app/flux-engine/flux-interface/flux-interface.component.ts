@@ -11,14 +11,19 @@ import { DialogService } from '../services/dialog.service';
 })
 export class FluxInterfaceComponent implements OnInit {
 
-  currentLocation: Location;
-  currentDialog: {};
+  currentScene: { location: any, conversations: any[] };
 
-  constructor(private userService: UserService, private locationService: LocationService, private dialogService: DialogService) {
+  constructor(
+      private userService: UserService, 
+      private locationService: LocationService, 
+      private dialogService: DialogService) {
+
+    this.currentScene = {
+      location: null,
+      conversations: []
+    }
+    
     this.LoadScene(userService.GetLocation());
-
-    //this.currentDialog = {content: 'test two'};
-    let testDialog = this.dialogService.GetDialog('room1_n');
     
   }
 
@@ -27,21 +32,21 @@ export class FluxInterfaceComponent implements OnInit {
   }
 
   _resetScene(){
-    this.currentLocation = <Location>{};
-    this.currentDialog = {};
+    this.currentScene = {
+      location: <Location>{},
+      conversations: []
+    }
   }
 
   public LoadScene(alias){
     this._resetScene();
     this.userService.SetLocation(alias);
-    this.currentLocation = this.locationService.GetLocation(this.userService.GetLocation());
+    this.currentScene.location = this.locationService.GetLocation(this.userService.GetLocation());
 
     // Build the dialog tree
-    for( let alias of this.currentLocation.scene.dialog ){
-      this.currentDialog[alias] = this.dialogService.GetDialog(alias);
-    }
+    this.currentScene.conversations = this.dialogService.GetActiveDialogForUserState(this.userService.GetUserState());
 
-    console.log('currentDialog', this.currentDialog);
+    console.log('currentScene', this.currentScene);
   }
 
 }

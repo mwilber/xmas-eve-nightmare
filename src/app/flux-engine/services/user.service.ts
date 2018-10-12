@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UserState } from '../interfaces/user-state';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,14 @@ export class UserService {
     this.keys = [];
     this.location = 'room1';
     this.prestige = 0;
+  }
+  
+  public GetUserState(): UserState {
+    return {
+      location: this.location,
+      prestige: this.prestige,
+      keys: this.keys.slice()
+    }
   }
 
   public GetLocation(){

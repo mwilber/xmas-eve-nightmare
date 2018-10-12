@@ -1,14 +1,14 @@
 <div class="flux-interface">
     <div class="location label">
-        Location: {{currentLocation.label}}
+        Location: {{currentScene.location.label}}
     </div>
     <div class="location adjacent">
         <button 
-            *ngFor="let alias of currentLocation.adjacentLocations"
-            (click)="ChangeLocation(alias)"
+            *ngFor="let alias of currentScene.location.adjacentLocations"
+            (click)="LoadScene(alias)"
         >{{alias}}</button>
     </div>
     <div class="stage">
-        <flux-dialog [dialog]="currentDialog"></flux-dialog>
+        <flux-dialog [conversations]="currentScene.conversations"></flux-dialog>
     </div>
 </div>

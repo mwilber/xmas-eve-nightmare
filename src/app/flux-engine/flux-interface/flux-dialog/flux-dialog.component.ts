@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DialogService } from '../../services/dialog.service';
+import { Dialog } from '../../interfaces/dialog';
 
 @Component({
   selector: 'flux-dialog',
@@ -8,16 +9,17 @@ import { DialogService } from '../../services/dialog.service';
 })
 export class FluxDialogComponent implements OnInit {
 
-  @Input() dialog;
+  @Input() conversations;
+  selectedCharacter: string;
+  activeDialog: Dialog;
 
   constructor() {
-    
+    this.selectedCharacter = 'narrator';
+    this.activeDialog = null;
   }
 
   ngOnInit() {
-    if(typeof this.dialog === 'undefined'){
-      this.dialog = {};
-    }
+    this.activeDialog = this.conversations[this.selectedCharacter];
   }
 
 }
