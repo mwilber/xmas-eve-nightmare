@@ -11,9 +11,12 @@ import { Location } from '../interfaces/location'
 export class FluxInterfaceComponent implements OnInit {
 
   currentLocation: Location;
+  currentDialog: {};
 
   constructor(private userService: UserService, private locationService: LocationService) {
     this.ChangeLocation(userService.GetLocation());
+
+    //this.currentDialog = {content: 'test two'};
   }
 
   ngOnInit() {
