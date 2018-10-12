@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InterfaceComponent } from './interface/interface.component';
+import { FluxInterfaceComponent } from './flux-interface/flux-interface.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    InterfaceComponent
+    FluxInterfaceComponent
   ],
   exports: [
-    InterfaceComponent
+    FluxInterfaceComponent
   ]
 })
 export class FluxEngineModule { }

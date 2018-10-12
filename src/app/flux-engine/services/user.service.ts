@@ -15,7 +15,10 @@ export class UserService {
     this.prestige = 0;
   }
 
-  GetLocation(){
+  public GetLocation(){
     return this.location;
+  }
+  public SetLocation(alias){
+    this.location = alias;
   }
 }

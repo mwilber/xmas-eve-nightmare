@@ -22,7 +22,15 @@ export class LocationService {
         alias: 'room2', 
         label: 'Room Two', 
         adjacentLocations: [
-          'room1'
+          'room1',
+          'room3'
+        ]
+      },
+      {
+        alias: 'room3', 
+        label: 'Room Three', 
+        adjacentLocations: [
+          'room2'
         ]
       }
     ]

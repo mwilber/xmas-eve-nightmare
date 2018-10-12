@@ -1,0 +1,11 @@
+<div class="flux-interface">
+    <div class="location label">
+        Location: {{currentLocation.label}}
+    </div>
+    <div class="location adjacent">
+        <button 
+            *ngFor="let alias of currentLocation.adjacentLocations"
+            (click)="ChangeLocation(alias)"
+        >{{alias}}</button>
+    </div>
+</div>
