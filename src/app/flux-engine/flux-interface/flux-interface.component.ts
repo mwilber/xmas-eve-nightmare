@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { LocationService } from '../services/location.service';
-import { Location } from '../models/location'
+import { Location } from '../interfaces/location'
 
 @Component({
   selector: 'flux-interface',
@@ -17,7 +17,7 @@ export class FluxInterfaceComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.currentLocation);
+    //console.log(this.currentLocation);
   }
 
   public ChangeLocation(alias){
