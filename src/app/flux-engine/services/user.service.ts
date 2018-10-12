@@ -9,5 +9,13 @@ export class UserService {
   prestige: number;
   location: string;
 
-  constructor() { }
+  constructor() {
+    this.keys = [];
+    this.location = 'room1';
+    this.prestige = 0;
+  }
+
+  GetLocation(){
+    return this.location;
+  }
 }
