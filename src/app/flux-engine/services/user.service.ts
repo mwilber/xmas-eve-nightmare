@@ -5,5 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
 
+  keys: string[];
+  prestige: number;
+  location: string;
+
   constructor() { }
 }
