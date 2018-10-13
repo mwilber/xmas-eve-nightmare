@@ -3,5 +3,7 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Preview</a>
+  <a routerLink="/editor" routerLinkActive="active">Edit</a>
 </div>
-<flux-interface></flux-interface>
+<router-outlet></router-outlet>

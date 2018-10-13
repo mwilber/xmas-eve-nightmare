@@ -115,6 +115,10 @@ export class DialogService {
 
   }
 
+  GetAllDialogForLocation(roomAlias: string){
+    return this.storyScript[roomAlias];
+  }
+
   // GetActiveDialogByAliasList(aliases: string[]){
   //   let dialogs = [];
 
