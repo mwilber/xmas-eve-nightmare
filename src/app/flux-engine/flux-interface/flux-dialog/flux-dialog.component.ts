@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { DialogService } from '../../services/dialog.service';
 import { Dialog } from '../../interfaces/dialog';
 
@@ -10,6 +10,7 @@ import { Dialog } from '../../interfaces/dialog';
 export class FluxDialogComponent implements OnInit {
 
   @Input() conversations;
+  @Output() conversationExit = new EventEmitter();
   selectedCharacter: string;
   activeDialog: Dialog;
   availableCharacters: string[];
@@ -30,6 +31,12 @@ export class FluxDialogComponent implements OnInit {
     this.RefreshCharacters();
   }
 
+  ReloadDialog(){
+    this.SetActiveCharacter('narrator');
+    // TODO: Trigger a tree reload
+    this.conversationExit.emit(null);
+  }
+
   RefreshCharacters(){
     this.availableCharacters = [];
     let characterProps = Object.keys(this.conversations);
@@ -41,8 +48,15 @@ export class FluxDialogComponent implements OnInit {
   }
 
   RefreshDialog(){
+    this.activeDialog = <Dialog>{};
     // Get active dialog
-    this.activeDialog = this.conversations[this.selectedCharacter];
+    if(this.conversations.hasOwnProperty(this.selectedCharacter)){
+      this.activeDialog = this.conversations[this.selectedCharacter];
+    }
+  }
+
+  SetDialogNode(node: Dialog){
+    this.activeDialog = node;
   }
 
   SetActiveCharacter(alias: string){

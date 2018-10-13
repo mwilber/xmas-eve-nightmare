@@ -1,0 +1,10 @@
+.dialog-component{
+    margin: 20px;
+    padding: 20px;
+    border: solid 1px #ccc;
+}
+
+.dialog-content{ 
+    padding: 20px;
+    background: #ccc;
+}

@@ -9,6 +9,6 @@
         >{{alias}}</button>
     </div>
     <div class="stage">
-        <flux-dialog [conversations]="currentScene.conversations"></flux-dialog>
+        <flux-dialog [conversations]="currentScene.conversations" (conversationExit)="ProcessAction($event)"></flux-dialog>
     </div>
 </div>

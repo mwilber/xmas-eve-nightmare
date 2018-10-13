@@ -1,9 +1,22 @@
-<p *ngIf="activeDialog.hasOwnProperty('content')">
-  {{activeDialog.content}}
-</p>
-<div class="character-list">
-  <button 
-      *ngFor="let characterAlias of availableCharacters"
-      (click)="SetActiveCharacter(characterAlias)"
-  >{{characterAlias}}</button>
+<div class="dialog-component">
+  <div class="character-list">
+    <button 
+        *ngFor="let characterAlias of availableCharacters"
+        (click)="SetActiveCharacter(characterAlias)"
+    >{{characterAlias}}</button>
+  </div>
+  
+  <div class="dialog-content" *ngIf="activeDialog.hasOwnProperty('content')">
+    <p>
+      {{activeDialog.content}}
+    </p>
+    <div class="dialog-actions">
+      <button 
+        *ngFor="let child of activeDialog.children"
+        (click)="SetDialogNode(child)"
+      >{{child.label}}</button>
+      <button
+        (click)="ReloadDialog()">Exit</button>
+    </div>
+  </div>
 </div>

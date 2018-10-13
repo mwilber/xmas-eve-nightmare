@@ -82,57 +82,6 @@ export class DialogService {
       ]
     };
 
-
-    // this.dialogTree = {
-    //   room1_n: {
-    //     character: '',
-    //     location: 'room1',
-    //     dialogRoots: [
-    //       {
-    //         trigger: {},
-    //         dialog: {
-    //           id: '001_001',
-    //           label: '',
-    //           content: 'You are in a dark and stormy room.',
-    //           children: []
-    //         }
-    //       }
-    //     ]
-    //   },
-    //   room1_mike_intro: {
-    //     character: 'mike',
-    //     location: 'room1',
-    //     dialog: {
-    //       id: '001_001',
-    //       label: '',
-    //       content: 'Hi. I\'m mike. This is my brother Kevin. And this is my other brother bill',
-    //       children: [{
-    //         id: '002_001',
-    //         label: 'I love you all.',
-    //         content: 'We too are fond of you',
-    //         children: []
-    //       },
-    //       {
-    //         id: '002_002',
-    //         label: 'I don\'t like you.',
-    //         content: 'We are ashamed.',
-    //         children: []
-    //       }]
-    //     }
-    //   },
-    //   room2_n: {
-    //     character: '',
-    //     location: 'room2',
-    //     dialog: {
-    //       id: '001_001',
-    //       label: '',
-    //       content: 'You are in a less stormy, and quasi-dark room.',
-    //       children: []
-    //     }
-    //   }
-
-    // }/* dialog tree */
-
   }
 
   GetActiveDialogForUserState(userState: UserState): any {
@@ -140,12 +89,14 @@ export class DialogService {
     let dialogs = {};
 
     console.log('userState', userState);
-    for( let interaction of this.storyScript[userState.location]){
-      if( interaction.character ){
-        dialogs[interaction.character] = interaction.dialog;
-        
-      }else{
-        dialogs['narrator'] = interaction.dialog;
+    if( this.storyScript.hasOwnProperty(userState.location) ){
+      for( let interaction of this.storyScript[userState.location]){
+        if( interaction.character ){
+          dialogs[interaction.character] = interaction.dialog;
+          
+        }else{
+          dialogs['narrator'] = interaction.dialog;
+        }
       }
     }
 
