@@ -42,10 +42,12 @@ export class FluxInterfaceComponent implements OnInit {
     }
   }
 
-  ProcessAction(action){
-    console.log('Processing Action', action);
-    if(action){
-      // Pass the action to the userService
+  HandleAction(actions){
+    console.log('Processing Action', actions);
+    if(actions){
+      for( let action of actions){
+        this.userService.ProcessAction(action);
+      }
     }
     this.LoadScene(this.userService.GetLocation());
   }

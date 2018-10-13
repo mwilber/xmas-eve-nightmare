@@ -31,10 +31,10 @@ export class FluxDialogComponent implements OnInit {
     this.RefreshCharacters();
   }
 
-  ReloadDialog(){
+  ReloadDialog(actions:[]){
     this.SetActiveCharacter('narrator');
     // TODO: Trigger a tree reload
-    this.conversationExit.emit(null);
+    this.conversationExit.emit(actions);
   }
 
   RefreshCharacters(){

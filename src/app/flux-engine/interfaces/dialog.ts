@@ -6,6 +6,8 @@ export interface Dialog {
 
     children: Dialog[];
 
+    actions: {prop:string, value:any}[];
+
     character: string;
 
 }

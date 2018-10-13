@@ -39,6 +39,7 @@ export class DialogService {
             id: '001_001',
             label: '',
             content: 'You are in a dark and stormy room.',
+            actions: null,
             children: []
           }
         },
@@ -51,16 +52,24 @@ export class DialogService {
             id: '001_001',
             label: '',
             content: 'Hi. I\'m mike. This is my brother Kevin. And this is my other brother bill',
+            actions: null,
             children: [{
               id: '002_001',
               label: 'I love you all.',
               content: 'We too are fond of you',
+              actions: [
+                {
+                  name: 'key',
+                  prop: 'room1_mike_intro'
+                }
+              ],
               children: []
             },
             {
               id: '002_002',
               label: 'I don\'t like you.',
               content: 'We are ashamed.',
+              actions: null,
               children: []
             }]
           }
@@ -76,6 +85,7 @@ export class DialogService {
             id: '001_001',
             label: '',
             content: 'You are in a less stormy, and quasi-dark room.',
+            actions: null,
             children: []
           }
         }
