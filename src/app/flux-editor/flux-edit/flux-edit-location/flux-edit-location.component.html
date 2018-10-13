@@ -1,4 +1,11 @@
 <div class="edit location">
   <h1>{{location.alias}}</h1>
   <input [(ngModel)]="location.label" type="text"/>
+  <div class="edit conversation" *ngFor="let conversation of conversations">
+    <h2>Dialog Tree</h2>
+    <input [(ngModel)]="conversation.id" type="text"/>
+    <input [(ngModel)]="conversation.character" type="text"/>
+    <input [(ngModel)]="conversation.location" type="text"/>
+    <flux-edit-dialog [dialog]="conversation.dialog"></flux-edit-dialog>
+  </div>
 </div>

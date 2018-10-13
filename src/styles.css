@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+.edit{
+    margin: 20px;
+    padding: 20px;
+    border: solid 1px #ccc;
+    background: rgba(0,0,0,0.1);
+}
