@@ -16,6 +16,7 @@
         (click)="SetDialogNode(child)"
       >{{child.label}}</button>
       <button
+        *ngIf="selectedCharacter !== 'narrator' && activeDialog.children.length === 0"
         (click)="ReloadDialog(activeDialog.actions)">Exit</button>
     </div>
   </div>

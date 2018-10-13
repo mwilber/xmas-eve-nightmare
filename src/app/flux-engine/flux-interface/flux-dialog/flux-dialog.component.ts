@@ -31,7 +31,7 @@ export class FluxDialogComponent implements OnInit {
     this.RefreshCharacters();
   }
 
-  ReloadDialog(actions:[]){
+  ReloadDialog(actions){
     this.SetActiveCharacter('narrator');
     // TODO: Trigger a tree reload
     this.conversationExit.emit(actions);

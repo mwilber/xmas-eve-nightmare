@@ -102,8 +102,9 @@ export class DialogService {
     if( this.storyScript.hasOwnProperty(userState.location) ){
       for( let interaction of this.storyScript[userState.location]){
         if( interaction.character ){
-          dialogs[interaction.character] = interaction.dialog;
-          
+          if( !userState.keys.includes(interaction.id) ){
+            dialogs[interaction.character] = interaction.dialog;
+          }
         }else{
           dialogs['narrator'] = interaction.dialog;
         }
