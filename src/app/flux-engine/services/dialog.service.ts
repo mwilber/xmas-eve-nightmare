@@ -34,7 +34,7 @@ export class DialogService {
           id: 'room1_n_bkg',
           character: '',
           location: 'room1',
-          enable: [],
+          triggers: null,
           dialog: {
             id: '001_001',
             label: '',
@@ -47,7 +47,7 @@ export class DialogService {
           id: 'room1_mike_intro',
           character: 'mike',
           location: 'room1',
-          enable: [],
+          triggers: null,
           dialog: {
             id: '001_001',
             label: '',
@@ -80,7 +80,7 @@ export class DialogService {
           id: 'room2_n_bkg',
           character: '',
           location: 'room2',
-          enable: [],
+          triggers: null,
           dialog: {
             id: '001_001',
             label: '',

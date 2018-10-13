@@ -6,6 +6,13 @@
     <input [(ngModel)]="conversation.id" type="text"/>
     <input [(ngModel)]="conversation.character" type="text"/>
     <input [(ngModel)]="conversation.location" type="text"/>
+    <div class="triggers">
+      <h3>Triggers</h3>
+      <button (click)="AddTrigger()">Add Trigger</button>
+      <div *ngIf="conversation.triggers">
+        <input *ngFor="let trigger of conversation.triggers; let i = index" [(ngModel)]="conversation.triggers[i]"/>
+      </div>
+    </div>
     <flux-edit-dialog [dialog]="conversation.dialog"></flux-edit-dialog>
   </div>
 </div>

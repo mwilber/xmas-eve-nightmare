@@ -4,6 +4,7 @@
   <textarea [(ngModel)]="dialog.content" type="text"></textarea>
   <div class="children">
     <h3>Children</h3>
+    <button (click)="AddChildDialog()">Add Child Dialog</button>
     <flux-edit-dialog *ngFor="let child of dialog.children" [dialog]="child"></flux-edit-dialog>
   </div>
 </div> 

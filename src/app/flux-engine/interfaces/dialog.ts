@@ -3,6 +3,7 @@ export interface Dialog {
     id: string;
     label: string;
     content: string;
+    trigger: string[];
 
     children: Dialog[];
 
