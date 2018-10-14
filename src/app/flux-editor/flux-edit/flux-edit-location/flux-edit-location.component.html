@@ -1,6 +1,7 @@
 <div class="edit location">
   <h1>{{location.alias}}</h1>
   <input [(ngModel)]="location.label" type="text"/>
+  <button (click)="AddDialogTree()">Add Dialog Tree</button>
   <div class="edit conversation" *ngFor="let conversation of conversations">
     <h2>Dialog Tree</h2>
     <input [(ngModel)]="conversation.id" type="text"/>
@@ -8,7 +9,7 @@
     <input [(ngModel)]="conversation.location" type="text"/>
     <div class="triggers">
       <h3>Triggers</h3>
-      <button (click)="AddTrigger()">Add Trigger</button>
+      <button (click)="AddTrigger(conversation)">Add Trigger</button>
       <div *ngIf="conversation.triggers">
         <input *ngFor="let trigger of conversation.triggers; let i = index" [(ngModel)]="conversation.triggers[i]"/>
       </div>

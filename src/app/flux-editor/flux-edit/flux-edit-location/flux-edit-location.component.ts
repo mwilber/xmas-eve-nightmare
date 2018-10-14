@@ -22,4 +22,29 @@ export class FluxEditLocationComponent implements OnInit {
     this.conversations = this.dialogService.GetAllDialogForLocation(this.location.alias);
   }
 
+  AddDialogTree(){
+    this.conversations.push(
+      {
+        id: '',
+        character: '',
+        location: '',
+        triggers: null,
+        dialog: {
+          id: '',
+          label: '',
+          content: '',
+          actions: null,
+          children: []
+        }
+      }
+    );
+  }
+
+  AddTrigger(conversation){
+    if(!Array.isArray(conversation.triggers)){
+      conversation.triggers = [];
+    }
+    conversation.triggers.push("");
+  }
+
 }

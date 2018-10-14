@@ -44,6 +44,19 @@ export class DialogService {
           }
         },
         {
+          id: 'room1_n_bkg_2',
+          character: '',
+          location: 'room1',
+          triggers: ['room1_mike_intro'],
+          dialog: {
+            id: '001_001',
+            label: '',
+            content: 'Ah. I see you have met the gang.',
+            actions: null,
+            children: []
+          }
+        },
+        {
           id: 'room1_mike_intro',
           character: 'mike',
           location: 'room1',

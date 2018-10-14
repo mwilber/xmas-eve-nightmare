@@ -2,6 +2,19 @@
   <label>id:</label><input [(ngModel)]="dialog.id" type="text"/>
   <label>label:</label><input [(ngModel)]="dialog.label" type="text"/>
   <textarea [(ngModel)]="dialog.content" type="text"></textarea>
+  <div class="actions">
+    <h3>Actions</h3>
+    <button (click)="AddAction()">Add Action</button>
+    <div *ngIf="dialog.actions">
+      <ul>
+        <li *ngFor="let action of dialog.actions; let i = index">
+          <label>Name:</label><input [(ngModel)]="dialog.actions[i].name"/>
+          <label>Prop:</label><input [(ngModel)]="dialog.actions[i].prop"/>
+        </li>
+      </ul>
+      
+    </div>
+  </div>
   <div class="children">
     <h3>Children</h3>
     <button (click)="AddChildDialog()">Add Child Dialog</button>

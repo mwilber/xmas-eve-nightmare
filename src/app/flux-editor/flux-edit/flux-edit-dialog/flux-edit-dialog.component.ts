@@ -15,8 +15,31 @@ export class FluxEditDialogComponent implements OnInit {
   ngOnInit() {
   }
 
+  AddAction(){
+    if(!Array.isArray(this.dialog.actions)){
+      this.dialog.actions = [];
+    }
+    this.dialog.actions.push(
+      {
+        prop: '',
+        value: ''
+      }
+    );
+  }
+
   AddChildDialog(){
-    this.dialog.children.push(<Dialog>{});
+    if(!Array.isArray(this.dialog.children)){
+      this.dialog.children = [];
+    }
+    this.dialog.children.push(
+      <Dialog>{
+        id: '',
+        label: '',
+        content: '',
+        actions: null,
+        children: null
+      }
+    );
     console.log('child added', this.dialog);
   }
 
