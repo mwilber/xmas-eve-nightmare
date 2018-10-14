@@ -29,6 +29,8 @@ export class FluxEditComponent implements OnInit {
 
   LoadData(){
     this.locationService.LoadFromFirebase();
+    this.dialogService.LoadFromFirebase();
+    this.dialogService.LoadFromFirebase();
   }
 
 }

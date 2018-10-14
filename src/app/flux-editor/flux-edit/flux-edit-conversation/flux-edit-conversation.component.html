@@ -1,0 +1,16 @@
+<div class="edit conversation">
+  <h2>Conversation</h2>
+  <label>ID: </label><input [(ngModel)]="conversation.id" type="text"/>
+  <br/>
+  <label>Character: </label><input [(ngModel)]="conversation.character" type="text"/>
+  <br/>
+  <!-- <input [(ngModel)]="conversation.location" type="text"/> -->
+  <div class="triggers">
+    <h3>Triggers</h3>
+    <button (click)="AddTrigger(conversation)">Add Trigger</button>
+    <div *ngIf="conversation.triggers">
+      <input *ngFor="let trigger of conversation.triggers; let i = index" [(ngModel)]="conversation.triggers[i]"/>
+    </div>
+  </div>
+  <flux-edit-dialog [dialog]="conversation.dialog"></flux-edit-dialog>
+</div>

@@ -1,7 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 .edit{
-    margin: 20px;
-    padding: 20px;
+    float:left;
+    margin: 10px;
+    padding: 10px;
+    width: calc(100% - 42px);
     border: solid 1px #ccc;
     background: rgba(0,0,0,0.1);
+}
+
+.edit.dialog .edit.dialog{
+    float: left;
+    width: calc(50% - 42px);
+}
+
+.edit.dialog textarea{
+    width: 100%;
+    max-width: 500px;
+    height: 100px;
 }

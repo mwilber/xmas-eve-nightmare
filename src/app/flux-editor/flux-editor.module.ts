@@ -4,8 +4,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FluxEditComponent } from './flux-edit/flux-edit.component';
 import { FluxEditLocationComponent } from './flux-edit/flux-edit-location/flux-edit-location.component';
 import { FormsModule } from '@angular/forms';
-import { FluxEditDialogComponent } from './flux-edit/flux-edit-dialog/flux-edit-dialog.component';
+import { FluxEditDialogComponent } from './flux-edit/flux-edit-conversation/flux-edit-dialog/flux-edit-dialog.component';
 import { RouterModule } from '@angular/router';
+import { FluxEditConversationComponent } from './flux-edit/flux-edit-conversation/flux-edit-conversation.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     RouterModule
   ],
-  declarations: [FluxEditComponent, FluxEditLocationComponent, FluxEditDialogComponent],
+  declarations: [FluxEditComponent, FluxEditLocationComponent, FluxEditDialogComponent, FluxEditConversationComponent],
   exports: [FluxEditComponent]
 })
 export class FluxEditorModule { }

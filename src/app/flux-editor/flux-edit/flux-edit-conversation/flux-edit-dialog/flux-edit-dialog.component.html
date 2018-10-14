@@ -1,6 +1,7 @@
 <div class="edit dialog">
-  <label>id:</label><input [(ngModel)]="dialog.id" type="text"/>
+  <!-- <label>id:</label><input [(ngModel)]="dialog.id" type="text"/> -->
   <label>label:</label><input [(ngModel)]="dialog.label" type="text"/>
+  <br/>
   <textarea [(ngModel)]="dialog.content" type="text"></textarea>
   <div class="actions">
     <h3>Actions</h3>
@@ -18,6 +19,7 @@
   <div class="children">
     <h3>Children</h3>
     <button (click)="AddChildDialog()">Add Child Dialog</button>
+    <div style="clear:both;"></div>
     <flux-edit-dialog *ngFor="let child of dialog.children" [dialog]="child"></flux-edit-dialog>
   </div>
 </div> 

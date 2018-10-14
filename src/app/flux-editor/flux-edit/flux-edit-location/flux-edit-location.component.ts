@@ -13,6 +13,8 @@ export class FluxEditLocationComponent implements OnInit {
 
   @Input() location: Location;
   conversations;
+  newCharacter;
+  newLabel;
 
   constructor(
     private locationService: LocationService,
@@ -32,8 +34,8 @@ export class FluxEditLocationComponent implements OnInit {
   AddDialogTree(){
     this.conversations.push(
       {
-        id: '',
-        character: '',
+        id: this.location.alias+'_'+(this.newCharacter || 'n')+'_'+(this.newLabel || ''),
+        character: (this.newCharacter || ''),
         location: '',
         triggers: null,
         dialog: {
@@ -45,13 +47,6 @@ export class FluxEditLocationComponent implements OnInit {
         }
       }
     );
-  }
-
-  AddTrigger(conversation){
-    if(!Array.isArray(conversation.triggers)){
-      conversation.triggers = [];
-    }
-    conversation.triggers.push("");
   }
 
 }

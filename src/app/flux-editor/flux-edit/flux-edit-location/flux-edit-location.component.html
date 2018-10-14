@@ -1,19 +1,14 @@
 <div class="edit location">
-  <h1><a routerLink="/editor/{{location.alias}}">{{location.alias}}</a></h1>
-  <input [(ngModel)]="location.label" type="text"/>
-  <button (click)="AddDialogTree()">Add Dialog Tree</button>
-  <div class="edit conversation" *ngFor="let conversation of conversations">
-    <h2>Dialog Tree</h2>
-    <input [(ngModel)]="conversation.id" type="text"/>
-    <input [(ngModel)]="conversation.character" type="text"/>
-    <input [(ngModel)]="conversation.location" type="text"/>
-    <div class="triggers">
-      <h3>Triggers</h3>
-      <button (click)="AddTrigger(conversation)">Add Trigger</button>
-      <div *ngIf="conversation.triggers">
-        <input *ngFor="let trigger of conversation.triggers; let i = index" [(ngModel)]="conversation.triggers[i]"/>
-      </div>
-    </div>
-    <flux-edit-dialog [dialog]="conversation.dialog"></flux-edit-dialog>
+  <h1><a routerLink="/editor/location/{{location.alias}}">{{location.alias}}</a></h1>
+  <label>Label: </label><input [(ngModel)]="location.label" type="text"/>
+  <br/>
+  <br/>
+  <input type="text" [(ngModel)]="newCharacter" placeholder="character"/><input type="text" [(ngModel)]="newLabel" placeholder="label"/>
+  <br/>
+  {{this.location.alias+'_'+(this.newCharacter || 'n')+'_'+(this.newLabel || '')}} -> <button (click)="AddDialogTree()">Add Dialog Tree</button>
+  <br/>
+  <br/>
+  <div *ngFor="let conversation of conversations">
+    <a routerLink="/editor/conversation/{{conversation.id}}">{{conversation.id}}</a>
   </div>
 </div>
