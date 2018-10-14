@@ -107,6 +107,21 @@ export class DialogService {
 
   }
 
+  _validateInteraction(userState: UserState, interaction: any){
+    if(!userState.keys.includes(interaction.id)){
+      if(Array.isArray(interaction.triggers)){
+        for(let trigger of interaction.triggers){
+          if(userState.keys.includes(trigger)){
+            return true;
+          }
+        }
+      }else{
+        return true;
+      }
+    }
+    return false;
+  }
+
   GetActiveDialogForUserState(userState: UserState): any {
 
     let dialogs = {};
@@ -114,12 +129,13 @@ export class DialogService {
     console.log('userState', userState);
     if( this.storyScript.hasOwnProperty(userState.location) ){
       for( let interaction of this.storyScript[userState.location]){
-        if( interaction.character ){
-          if( !userState.keys.includes(interaction.id) ){
-            dialogs[interaction.character] = interaction.dialog;
+        // Validate here
+        if( this._validateInteraction(userState, interaction) ){
+          if( interaction.character ){
+              dialogs[interaction.character] = interaction.dialog;
+          }else{
+            dialogs['narrator'] = interaction.dialog;
           }
-        }else{
-          dialogs['narrator'] = interaction.dialog;
         }
       }
     }
