@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Character } from '../interfaces/character';
 import { UserState } from '../interfaces/user-state';
 
@@ -7,11 +8,20 @@ import { UserState } from '../interfaces/user-state';
 })
 export class DialogService {
 
+  httpOptions: {};
+
   //dialogTree: {};
   characters: {};
   storyScript: {};
 
-  constructor() {
+  constructor(private http:HttpClient) {
+
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        //'Authorization': 'my-auth-token'
+      })
+    };
 
     this.characters = {
       mike: {
@@ -120,6 +130,18 @@ export class DialogService {
       }
     }
     return false;
+  }
+
+  _putStoryScript(){
+    return this.http.put('https://gzflux.firebaseio.com/stories/demo/storyscript.json', this.storyScript, this.httpOptions);
+  }
+  _putCharacters(){
+    return this.http.put('https://gzflux.firebaseio.com/stories/demo/characters.json', this.characters, this.httpOptions);
+  }
+
+  SaveToFirebase(){
+    this._putStoryScript().subscribe(result => {console.log('Store story script complete', result)});
+    this._putCharacters().subscribe(result => {console.log('Store characters complete', result)});
   }
 
   GetActiveDialogForUserState(userState: UserState): any {

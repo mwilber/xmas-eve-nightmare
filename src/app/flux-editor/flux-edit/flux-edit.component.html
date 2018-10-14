@@ -1,3 +1,5 @@
 <div class="edit">
+  <button (click)="SaveData()">Save</button>
+  <button (click)="LoadData()">Load</button>
   <flux-edit-location *ngFor="let location of locations" [location]="location"></flux-edit-location>
 </div>
