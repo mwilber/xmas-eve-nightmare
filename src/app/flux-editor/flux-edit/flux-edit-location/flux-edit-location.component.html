@@ -1,5 +1,5 @@
 <div class="edit location">
-  <h1>{{location.alias}}</h1>
+  <h1><a routerLink="/editor/{{location.alias}}">{{location.alias}}</a></h1>
   <input [(ngModel)]="location.label" type="text"/>
   <button (click)="AddDialogTree()">Add Dialog Tree</button>
   <div class="edit conversation" *ngFor="let conversation of conversations">
