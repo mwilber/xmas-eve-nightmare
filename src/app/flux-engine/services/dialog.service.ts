@@ -23,97 +23,100 @@ export class DialogService {
       })
     };
 
-    this.characters = {
-      mike: {
-        alias: 'mike',
-        label: 'Michael J. Nelson'
-      },
-      kevin: {
-        alias: 'kevin',
-        label: 'Kevin Murphy'
-      },
-      bill: {
-        alias: 'bill',
-        label: 'William Combett III'
-      }
-    };
+    this.characters = {};
+    this.storyScript = {};
 
-    this.storyScript = {
-      room1: [
-        {
-          id: 'room1_n_bkg',
-          character: '',
-          location: 'room1',
-          triggers: null,
-          dialog: {
-            id: '001_001',
-            label: '',
-            content: 'You are in a dark and stormy room.',
-            actions: null,
-            children: []
-          }
-        },
-        {
-          id: 'room1_n_bkg_2',
-          character: '',
-          location: 'room1',
-          triggers: ['room1_mike_intro'],
-          dialog: {
-            id: '001_001',
-            label: '',
-            content: 'Ah. I see you have met the gang.',
-            actions: null,
-            children: []
-          }
-        },
-        {
-          id: 'room1_mike_intro',
-          character: 'mike',
-          location: 'room1',
-          triggers: null,
-          dialog: {
-            id: '001_001',
-            label: '',
-            content: 'Hi. I\'m mike. This is my brother Kevin. And this is my other brother bill',
-            actions: null,
-            children: [{
-              id: '002_001',
-              label: 'I love you all.',
-              content: 'We too are fond of you',
-              actions: [
-                {
-                  name: 'key',
-                  prop: 'room1_mike_intro'
-                }
-              ],
-              children: []
-            },
-            {
-              id: '002_002',
-              label: 'I don\'t like you.',
-              content: 'We are ashamed.',
-              actions: null,
-              children: []
-            }]
-          }
-        }
-      ],
-      room2: [
-        {
-          id: 'room2_n_bkg',
-          character: '',
-          location: 'room2',
-          triggers: null,
-          dialog: {
-            id: '001_001',
-            label: '',
-            content: 'You are in a less stormy, and quasi-dark room.',
-            actions: null,
-            children: []
-          }
-        }
-      ]
-    };
+    // this.characters = {
+    //   mike: {
+    //     alias: 'mike',
+    //     label: 'Michael J. Nelson'
+    //   },
+    //   kevin: {
+    //     alias: 'kevin',
+    //     label: 'Kevin Murphy'
+    //   },
+    //   bill: {
+    //     alias: 'bill',
+    //     label: 'William Combett III'
+    //   }
+    // };
+
+    // this.storyScript = {
+    //   room1: [
+    //     {
+    //       id: 'room1_n_bkg',
+    //       character: '',
+    //       location: 'room1',
+    //       triggers: null,
+    //       dialog: {
+    //         id: '001_001',
+    //         label: '',
+    //         content: 'You are in a dark and stormy room.',
+    //         actions: null,
+    //         children: []
+    //       }
+    //     },
+    //     {
+    //       id: 'room1_n_bkg_2',
+    //       character: '',
+    //       location: 'room1',
+    //       triggers: ['room1_mike_intro'],
+    //       dialog: {
+    //         id: '001_001',
+    //         label: '',
+    //         content: 'Ah. I see you have met the gang.',
+    //         actions: null,
+    //         children: []
+    //       }
+    //     },
+    //     {
+    //       id: 'room1_mike_intro',
+    //       character: 'mike',
+    //       location: 'room1',
+    //       triggers: null,
+    //       dialog: {
+    //         id: '001_001',
+    //         label: '',
+    //         content: 'Hi. I\'m mike. This is my brother Kevin. And this is my other brother bill',
+    //         actions: null,
+    //         children: [{
+    //           id: '002_001',
+    //           label: 'I love you all.',
+    //           content: 'We too are fond of you',
+    //           actions: [
+    //             {
+    //               name: 'key',
+    //               prop: 'room1_mike_intro'
+    //             }
+    //           ],
+    //           children: []
+    //         },
+    //         {
+    //           id: '002_002',
+    //           label: 'I don\'t like you.',
+    //           content: 'We are ashamed.',
+    //           actions: null,
+    //           children: []
+    //         }]
+    //       }
+    //     }
+    //   ],
+    //   room2: [
+    //     {
+    //       id: 'room2_n_bkg',
+    //       character: '',
+    //       location: 'room2',
+    //       triggers: null,
+    //       dialog: {
+    //         id: '001_001',
+    //         label: '',
+    //         content: 'You are in a less stormy, and quasi-dark room.',
+    //         actions: null,
+    //         children: []
+    //       }
+    //     }
+    //   ]
+    // };
 
   }
 
@@ -138,10 +141,26 @@ export class DialogService {
   _putCharacters(){
     return this.http.put('https://gzflux.firebaseio.com/stories/demo/characters.json', this.characters, this.httpOptions);
   }
+  _getStoryScript() {
+    return this.http.get<Location[]>('https://gzflux.firebaseio.com/stories/demo/storyscript.json');
+  }
+  _getCharacters() {
+    return this.http.get<Location[]>('https://gzflux.firebaseio.com/stories/demo/characters.json');
+  }
 
   SaveToFirebase(){
     this._putStoryScript().subscribe(result => {console.log('Store story script complete', result)});
     this._putCharacters().subscribe(result => {console.log('Store characters complete', result)});
+  }
+  LoadFromFirebase(){
+    this._getStoryScript().subscribe(result =>{
+      console.log('load story script complete', result);
+      this.storyScript = result;
+    });
+    this._getCharacters().subscribe(result =>{
+      console.log('load characters complete', result);
+      this.characters = result;
+    });
   }
 
   GetActiveDialogForUserState(userState: UserState): any {
