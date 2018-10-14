@@ -3,6 +3,7 @@ import { DialogService } from 'src/app/flux-engine/services/dialog.service';
 import { Location } from 'src/app/flux-engine/interfaces/location';
 import { ActivatedRoute } from '@angular/router';
 import { LocationService } from 'src/app/flux-engine/services/location.service';
+import { Dialog } from 'src/app/flux-engine/interfaces/dialog';
 
 @Component({
   selector: 'flux-edit-location',
@@ -47,6 +48,31 @@ export class FluxEditLocationComponent implements OnInit {
         }
       }
     );
+  }
+
+  GetConversationActions(conversation){
+    let result = '';
+
+    result += this.GetDialogActions(conversation.dialog);
+
+    return result;
+  }
+
+  GetDialogActions(dialog: Dialog){
+    let result = '';
+    if(Array.isArray(dialog.actions)){
+      for( let action of dialog.actions){
+        if(result !== '') result += ','
+        result += action.prop;
+      }
+      
+    }
+    if(Array.isArray(dialog.children)){
+      for(let dialogb of dialog.children){
+        result += this.GetDialogActions(dialogb);
+      }
+    }
+    return result;
   }
 
 }

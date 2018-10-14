@@ -9,6 +9,6 @@
   <br/>
   <br/>
   <div *ngFor="let conversation of conversations">
-    <a routerLink="/editor/conversation/{{conversation.id}}">{{conversation.id}}</a>
+    <a routerLink="/editor/conversation/{{conversation.id}}">{{conversation.id}}</a> [{{GetConversationActions(conversation)}}]
   </div>
 </div>
