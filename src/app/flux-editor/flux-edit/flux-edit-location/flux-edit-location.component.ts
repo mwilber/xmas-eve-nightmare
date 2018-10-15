@@ -14,6 +14,7 @@ export class FluxEditLocationComponent implements OnInit {
 
   @Input() location: Location;
   conversations;
+  characters;
   newCharacter;
   newLabel;
 
@@ -22,7 +23,7 @@ export class FluxEditLocationComponent implements OnInit {
     private dialogService: DialogService,
     private route: ActivatedRoute
   ) {
-    
+    this.characters = dialogService.GetCharacters();
   }
 
   ngOnInit() {
@@ -62,7 +63,7 @@ export class FluxEditLocationComponent implements OnInit {
     let result = '';
     if(Array.isArray(dialog.actions)){
       for( let action of dialog.actions){
-        if(result !== '') result += ','
+        if(result !== '') result += ', '
         result += action.prop;
       }
       
@@ -70,6 +71,7 @@ export class FluxEditLocationComponent implements OnInit {
     if(Array.isArray(dialog.children)){
       for(let dialogb of dialog.children){
         result += this.GetDialogActions(dialogb);
+        if(result !== '') result += ', '
       }
     }
     return result;

@@ -7,8 +7,13 @@
   <label>Label: </label><input [(ngModel)]="location.label" type="text"/>
   <br/>
   <br/>
-  <input type="text" [(ngModel)]="newCharacter" placeholder="character"/><input type="text" [(ngModel)]="newLabel" placeholder="label"/>
-  <br/>
+  {{this.location.alias}}_
+  <select [(ngModel)]="newCharacter">
+    <option *ngFor="let character of characters" value= {{character.alias}}>
+        {{character.label}}
+    </option>
+  </select>_
+  <input type="text" [(ngModel)]="newLabel" placeholder="label"/>&nbsp;&nbsp;
   {{this.location.alias+'_'+(this.newCharacter || 'n')+'_'+(this.newLabel || '')}} -> <button (click)="AddDialogTree()">Add Dialog Tree</button>
   <br/>
   <br/>

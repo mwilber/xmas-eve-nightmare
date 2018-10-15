@@ -17,7 +17,7 @@
     <button (click)="AddTrigger(conversation)">Add Trigger</button>
     <ul>
         <li *ngIf="conversation.triggers">
-          <input *ngFor="let trigger of conversation.triggers; let i = index" [(ngModel)]="conversation.triggers[i]"/>
+          <input *ngFor="let trigger of conversation.triggers; let i = index; trackBy:trackByFn" [(ngModel)]="conversation.triggers[i]"/>
         </li>
     </ul>
   </div>

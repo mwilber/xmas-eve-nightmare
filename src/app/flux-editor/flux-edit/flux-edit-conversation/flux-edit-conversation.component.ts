@@ -38,4 +38,8 @@ export class FluxEditConversationComponent implements OnInit {
     this.dialogService.SaveToFirebase();
   }
 
+  trackByFn(index: any, item: any) {
+    return index;
+  }
+
 }
