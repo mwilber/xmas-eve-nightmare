@@ -1,5 +1,9 @@
 <div class="edit location">
-  <h1><a routerLink="/editor/location/{{location.alias}}">{{location.alias}}</a></h1>
+  <button (click)="SaveData()" style="float:right;">Save</button>
+  <a routerLink="/editor">Home</a>
+  <h1>Location</h1>
+  <label>Alias: </label><input [(ngModel)]="location.alias" type="text"/>
+  <br/>
   <label>Label: </label><input [(ngModel)]="location.label" type="text"/>
   <br/>
   <br/>

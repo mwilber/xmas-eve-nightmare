@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DialogService } from 'src/app/flux-engine/services/dialog.service';
+import { Character } from 'src/app/flux-engine/interfaces/character';
 
 @Component({
   selector: 'app-flux-edit-conversation',
@@ -10,11 +11,14 @@ import { DialogService } from 'src/app/flux-engine/services/dialog.service';
 export class FluxEditConversationComponent implements OnInit {
 
   @Input() conversation;
+  characters: Character[];
 
   constructor(
     private dialogService: DialogService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.characters = dialogService.GetCharacters();
+  }
 
   ngOnInit() {
     if(this.route.snapshot.params['conversation']){
@@ -28,6 +32,10 @@ export class FluxEditConversationComponent implements OnInit {
       conversation.triggers = [];
     }
     conversation.triggers.push("");
+  }
+
+  SaveData(){
+    this.dialogService.SaveToFirebase();
   }
 
 }

@@ -1,5 +1,18 @@
 <div class="edit">
   <button (click)="SaveData()">Save</button>
   <button (click)="LoadData()">Load</button>
-  <flux-edit-location *ngFor="let location of locations" [location]="location"></flux-edit-location>
+  <h1>Locations</h1>
+  <ul>
+      <li *ngFor="let location of locations">
+          <a routerLink="/editor/location/{{location.alias}}">{{location.alias}}</a>
+      </li>
+  </ul>
+  <h1>Characters</h1>
+  <button (click)="AddCharacter()">Add Character</button>
+  <ul>
+      <li *ngFor="let character of characters">
+          <label>Alias: </label><input [(ngModel)]="character.alias" type="text"/>
+          <label>Label: </label><input [(ngModel)]="character.label" type="text"/>
+      </li>
+  </ul>
 </div>

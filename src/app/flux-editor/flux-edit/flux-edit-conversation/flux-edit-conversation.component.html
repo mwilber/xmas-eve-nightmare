@@ -1,16 +1,25 @@
 <div class="edit conversation">
+  <button (click)="SaveData()" style="float:right;">Save</button>
+  <a routerLink="/editor">Home</a>
   <h2>Conversation</h2>
   <label>ID: </label><input [(ngModel)]="conversation.id" type="text"/>
   <br/>
-  <label>Character: </label><input [(ngModel)]="conversation.character" type="text"/>
+  <label>Character: </label>
+  <select [(ngModel)]="conversation.character">
+    <option *ngFor="let character of characters" value= {{character.alias}}>
+        {{character.label}}
+    </option>
+  </select>
   <br/>
   <!-- <input [(ngModel)]="conversation.location" type="text"/> -->
   <div class="triggers">
     <h3>Triggers</h3>
     <button (click)="AddTrigger(conversation)">Add Trigger</button>
-    <div *ngIf="conversation.triggers">
-      <input *ngFor="let trigger of conversation.triggers; let i = index" [(ngModel)]="conversation.triggers[i]"/>
-    </div>
+    <ul>
+        <li *ngIf="conversation.triggers">
+          <input *ngFor="let trigger of conversation.triggers; let i = index" [(ngModel)]="conversation.triggers[i]"/>
+        </li>
+    </ul>
   </div>
   <flux-edit-dialog [dialog]="conversation.dialog"></flux-edit-dialog>
 </div>

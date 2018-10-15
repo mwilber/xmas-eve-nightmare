@@ -75,4 +75,9 @@ export class FluxEditLocationComponent implements OnInit {
     return result;
   }
 
+  SaveData(){
+    this.dialogService.SaveToFirebase();
+    this.locationService.SaveToFirebase();
+  }
+
 }
