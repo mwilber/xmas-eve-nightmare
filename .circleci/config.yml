@@ -13,6 +13,10 @@ jobs:
     steps:
       - checkout
 
+      - add_ssh_keys:
+          fingerprints:
+            - "9b:d7:93:0f:e4:42:60:79:4c:ab:1d:bc:70:67:7d:55"
+
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
