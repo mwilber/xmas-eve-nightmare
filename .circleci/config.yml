@@ -32,4 +32,4 @@ jobs:
 
       - run: ssh-keyscan -H mwilber.com >> ~/.ssh/known_hosts
       - run: npm run ng build --prod --build-optimizer --no-progress
-      - run: scp -r dist/* greenzeta@mwilber.com:/home/greenzeta/staging.greenzeta.com/gz-flux/
+      - run: scp -r dist/* dreamhost-circleci@mwilber.com:/home/greenzeta/staging.greenzeta.com/gz-flux/
