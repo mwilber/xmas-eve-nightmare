@@ -27,3 +27,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: npm run ng build --prod --build-optimizer --no-progress
+      - run: scp -r dist/* greenzeta@mwilber.com:/home/greenzeta/staging.greenzeta.com/gz-flux/
