@@ -13,6 +13,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref" : "/gz-flux/",
+            "deployUrl": "/gz-flux/",
             "outputPath": "dist/gz-flux",
             "index": "src/index.html",
             "main": "src/main.ts",
