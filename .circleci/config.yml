@@ -37,7 +37,7 @@ workflows:
   version: 2
   build_xen:
     jobs:
-      - build
+      - build:
           filters:
             branches:
               only: xmas-eve-nightmare
