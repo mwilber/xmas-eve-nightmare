@@ -22,45 +22,6 @@ export class LocationService {
 
     this.locations = [];
 
-    // this.locations = [
-    //   {
-    //     alias: 'room1', 
-    //     label: 'Room One', 
-    //     scene: {
-    //       dialog: [
-    //         'room1_n',
-    //         'room1_mike_intro'
-    //       ]
-    //     },
-    //     adjacentLocations: [
-    //       'room2'
-    //     ]
-    //   },
-    //   {
-    //     alias: 'room2', 
-    //     label: 'Room Two', 
-    //     scene: {
-    //       dialog: [
-    //         'room2_n'
-    //       ]
-    //     },
-    //     adjacentLocations: [
-    //       'room1',
-    //       'room3'
-    //     ]
-    //   },
-    //   {
-    //     alias: 'room3', 
-    //     label: 'Room Three', 
-    //     scene: {
-    //       dialog: []
-    //     },
-    //     adjacentLocations: [
-    //       'room2'
-    //     ]
-    //   }
-    // ]
-
     console.log('Location Service', this.locations);
   }
 
