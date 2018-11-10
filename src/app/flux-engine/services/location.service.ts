@@ -47,6 +47,11 @@ export class LocationService {
     return this.locations;
   }
 
+  public GetAllLocationAlias(): string[]{
+    let locationAliases = this.locations.map((location)=>{return location.alias});
+    return locationAliases;
+  }
+
   public GetLocation(alias: string): Location{
     for( let location of this.locations ){
       if( location.alias === alias ){

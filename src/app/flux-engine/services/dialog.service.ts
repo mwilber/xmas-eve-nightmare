@@ -77,14 +77,16 @@ export class DialogService {
     let dialogs = {};
 
     console.log('userState', userState);
-    if( this.storyScript.hasOwnProperty(userState.location) ){
-      for( let interaction of this.storyScript[userState.location]){
-        // Validate here
-        if( this._validateInteraction(userState, interaction) ){
-          if( interaction.character ){
-              dialogs[interaction.character] = interaction.dialog;
-          }else{
-            dialogs['narrator'] = interaction.dialog;
+    if( this.storyScript ){
+      if( this.storyScript.hasOwnProperty(userState.location) ){
+        for( let interaction of this.storyScript[userState.location]){
+          // Validate here
+          if( this._validateInteraction(userState, interaction) ){
+            if( interaction.character ){
+                dialogs[interaction.character] = interaction.dialog;
+            }else{
+              dialogs['narrator'] = interaction.dialog;
+            }
           }
         }
       }

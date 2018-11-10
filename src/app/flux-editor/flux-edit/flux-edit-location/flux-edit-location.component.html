@@ -7,6 +7,20 @@
   <label>Label: </label><input [(ngModel)]="location.label" type="text"/>
   <br/>
   <br/>
+  <h2>Adjacent Locations</h2>
+  <select [(ngModel)]="newAdjacentLocation">
+    <option *ngFor="let locationAlias of locationAliases" value={{locationAlias}}>
+      {{locationAlias}}
+    </option>
+  </select>
+  <button (click)="AddAdjacentLocation()">Add Adjacent Location</button>
+  <ul>
+    <li *ngFor="let adjacent of location.adjacentLocations">
+      {{adjacent}} <button (click)="RemoveAdjacentLocation()">Delete</button>
+    </li>
+  </ul>
+  <br/>
+  <br/>
   {{this.location.alias}}_
   <select [(ngModel)]="newCharacter">
     <option *ngFor="let character of characters" value= {{character.alias}}>

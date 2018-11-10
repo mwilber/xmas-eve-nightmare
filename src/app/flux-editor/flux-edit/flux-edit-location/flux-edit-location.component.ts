@@ -13,10 +13,12 @@ import { Dialog } from 'src/app/flux-engine/interfaces/dialog';
 export class FluxEditLocationComponent implements OnInit {
 
   @Input() location: Location;
+  locationAliases: string[];
   conversations;
   characters;
   newCharacter;
   newLabel;
+  newAdjacentLocation;
 
   constructor(
     private locationService: LocationService,
@@ -24,6 +26,7 @@ export class FluxEditLocationComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.characters = dialogService.GetCharacters();
+    this.locationAliases = locationService.GetAllLocationAlias();
   }
 
   ngOnInit() {
@@ -33,7 +36,14 @@ export class FluxEditLocationComponent implements OnInit {
     this.conversations = this.dialogService.GetAllDialogForLocation(this.location.alias);
   }
 
+  AddAdjacentLocation(){
+    if(this.newAdjacentLocation){
+      this.location.adjacentLocations.push(this.newAdjacentLocation);
+    }
+  }
+
   AddDialogTree(){
+    console.log(typeof this.conversations);
     this.conversations.push(
       {
         id: this.location.alias+'_'+(this.newCharacter || 'n')+'_'+(this.newLabel || ''),
