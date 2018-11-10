@@ -43,4 +43,15 @@ export class FluxEditComponent implements OnInit {
     });
   }
 
+  AddLocation(){
+    this.locations.push({
+      alias: 'new',
+      label: '',
+      scene: {
+          dialog: []
+      },
+      adjacentLocations: []
+    });
+  }
+
 }

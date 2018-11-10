@@ -2,6 +2,7 @@
   <button (click)="SaveData()">Save</button>
   <button (click)="LoadData()">Load</button>
   <h1>Locations</h1>
+  <button (click)="AddLocation()">Add Location</button>
   <ul>
       <li *ngFor="let location of locations">
           <a routerLink="/editor/location/{{location.alias}}">{{location.alias}}</a>
