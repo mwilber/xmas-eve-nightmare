@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  firebaseUrl: 'https://gzflux.firebaseio.com/stories/demo/'
+  firebaseUrl: 'https://gzflux.firebaseio.com/stories/xmasevenightmare/'
 };
 
 /*
