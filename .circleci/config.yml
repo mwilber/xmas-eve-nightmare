@@ -32,4 +32,12 @@ jobs:
 
       - run: ssh-keyscan -H mwilber.com >> ~/.ssh/known_hosts
       - run: npm run ng build --prod --build-optimizer --no-progress
-      - run: scp -r dist/gz-flux/* greenzeta@mwilber.com:/home/greenzeta/staging.greenzeta.com/gz-flux/
+      - run: scp -r dist/gz-flux/* greenzeta@mwilber.com:/home/greenzeta/staging.greenzeta.com/xmasevenightmare/
+workflows:
+  version: 2
+  build_xen:
+    jobs:
+      - build
+          filters:
+            branches:
+              only: xmas-eve-nightmare
