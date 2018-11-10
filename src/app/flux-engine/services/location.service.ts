@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Location } from '../interfaces/location'
+import { Location } from '../interfaces/location';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -64,10 +65,10 @@ export class LocationService {
   }
 
   _putLocations(){
-    return this.http.put('https://gzflux.firebaseio.com/stories/demo/locations.json', this.locations, this.httpOptions);
+    return this.http.put(environment.firebaseUrl+'locations.json', this.locations, this.httpOptions);
   }
   _getLocations() {
-    return this.http.get<Location[]>('https://gzflux.firebaseio.com/stories/demo/locations.json');
+    return this.http.get<Location[]>(environment.firebaseUrl+'locations.json');
   }
 
   SaveToFirebase(){

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Character } from '../interfaces/character';
 import { UserState } from '../interfaces/user-state';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -136,16 +137,16 @@ export class DialogService {
   }
 
   _putStoryScript(){
-    return this.http.put('https://gzflux.firebaseio.com/stories/demo/storyscript.json', this.storyScript, this.httpOptions);
+    return this.http.put(environment.firebaseUrl+'storyscript.json', this.storyScript, this.httpOptions);
   }
   _putCharacters(){
-    return this.http.put('https://gzflux.firebaseio.com/stories/demo/characters.json', this.characters, this.httpOptions);
+    return this.http.put(environment.firebaseUrl+'characters.json', this.characters, this.httpOptions);
   }
   _getStoryScript() {
-    return this.http.get<Location[]>('https://gzflux.firebaseio.com/stories/demo/storyscript.json');
+    return this.http.get<Location[]>(environment.firebaseUrl+'storyscript.json');
   }
   _getCharacters() {
-    return this.http.get<Character[]>('https://gzflux.firebaseio.com/stories/demo/characters.json');
+    return this.http.get<Character[]>(environment.firebaseUrl+'characters.json');
   }
 
   SaveToFirebase(){
