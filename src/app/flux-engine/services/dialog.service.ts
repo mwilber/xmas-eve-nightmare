@@ -48,6 +48,7 @@ export class DialogService {
     return this.http.put(environment.firebaseUrl+'storyscript.json', this.storyScript, this.httpOptions);
   }
   _putCharacters(){
+    debugger;
     return this.http.put(environment.firebaseUrl+'characters.json', this.characters, this.httpOptions);
   }
   _getStoryScript() {
@@ -64,11 +65,19 @@ export class DialogService {
   LoadFromFirebase(){
     this._getStoryScript().subscribe(result =>{
       console.log('load story script complete', result);
-      this.storyScript = result;
+      if( result ){
+        this.storyScript = result;
+      }else{
+        this.storyScript = {};
+      }
     });
     this._getCharacters().subscribe(result =>{
       console.log('load characters complete', result);
-      this.characters = result;
+      if( result ){
+        this.characters = result;
+      }else{
+        this.characters = [];
+      }
     });
   }
 

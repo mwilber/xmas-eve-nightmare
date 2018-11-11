@@ -37,6 +37,10 @@ export class FluxEditLocationComponent implements OnInit {
   }
 
   AddAdjacentLocation(){
+    // Set up the array of it loads in as null
+    if(!this.location.adjacentLocations){
+      this.location.adjacentLocations = [];
+    }
     if(this.newAdjacentLocation){
       this.location.adjacentLocations.push(this.newAdjacentLocation);
     }
