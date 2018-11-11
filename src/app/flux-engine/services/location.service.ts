@@ -20,7 +20,7 @@ export class LocationService {
       })
     };
 
-    this.locations = [];
+    this.locations = null;
 
     console.log('Location Service', this.locations);
   }

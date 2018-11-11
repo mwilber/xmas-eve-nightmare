@@ -1,5 +1,5 @@
 <div class="edit">
-  <button (click)="SaveData()">Save</button>
+  <button (click)="SaveData()" [disabled]="!allowSave">Save</button>
   <button (click)="LoadData()">Load</button>
   <h1>Locations</h1>
   <button (click)="AddLocation()">Add Location</button>

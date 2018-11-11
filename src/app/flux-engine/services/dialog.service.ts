@@ -24,8 +24,8 @@ export class DialogService {
       })
     };
 
-    this.characters = [];
-    this.storyScript = {};
+    this.characters = null;
+    this.storyScript = null;
 
   }
 
@@ -48,7 +48,6 @@ export class DialogService {
     return this.http.put(environment.firebaseUrl+'storyscript.json', this.storyScript, this.httpOptions);
   }
   _putCharacters(){
-    debugger;
     return this.http.put(environment.firebaseUrl+'characters.json', this.characters, this.httpOptions);
   }
   _getStoryScript() {
@@ -106,6 +105,10 @@ export class DialogService {
   }
 
   GetAllDialogForLocation(roomAlias: string){
+    // Inject an empty room reference if none exists
+    if(!this.storyScript.hasOwnProperty(roomAlias)){
+      this.storyScript[roomAlias] = [];
+    }
     return this.storyScript[roomAlias];
   }
 

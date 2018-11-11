@@ -47,7 +47,7 @@ export class FluxEditLocationComponent implements OnInit {
   }
 
   AddDialogTree(){
-    console.log(typeof this.conversations);
+    //debugger;
     this.conversations.push(
       {
         id: this.location.alias+'_'+(this.newCharacter || 'n')+'_'+(this.newLabel || ''),

@@ -14,12 +14,19 @@ export class FluxEditComponent implements OnInit {
   locations: Location[];
   characters: Character[];
 
+  allowSave = false;
+
   constructor(
       private locationService: LocationService,
       private dialogService: DialogService
   ) {
     this.locations = locationService.GetLocations();
     this.characters = dialogService.GetCharacters();
+    if(this.locations && this.characters){
+      this.allowSave = true;
+    }else{
+      this.allowSave = false;
+    }
   }
 
   ngOnInit() {
