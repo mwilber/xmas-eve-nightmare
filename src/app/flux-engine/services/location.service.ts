@@ -53,9 +53,11 @@ export class LocationService {
   }
 
   public GetLocation(alias: string): Location{
-    for( let location of this.locations ){
-      if( location.alias === alias ){
-        return location;
+    if( this.locations ){
+      for( let location of this.locations ){
+        if( location.alias === alias ){
+          return location;
+        }
       }
     }
     return null;
