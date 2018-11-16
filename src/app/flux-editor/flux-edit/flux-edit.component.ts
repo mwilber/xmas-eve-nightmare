@@ -3,6 +3,7 @@ import { LocationService } from 'src/app/flux-engine/services/location.service';
 import { Location } from 'src/app/flux-engine/interfaces/location';
 import { DialogService } from 'src/app/flux-engine/services/dialog.service';
 import { Character } from 'src/app/flux-engine/interfaces/character';
+import { LocalStorage } from 'ngx-store';
 
 @Component({
   selector: 'flux-edit',
@@ -11,8 +12,8 @@ import { Character } from 'src/app/flux-engine/interfaces/character';
 })
 export class FluxEditComponent implements OnInit {
 
-  locations: Location[];
-  characters: Character[];
+  @LocalStorage() locations;
+  @LocalStorage() characters;
 
   allowSave = false;
 
@@ -20,8 +21,8 @@ export class FluxEditComponent implements OnInit {
       private locationService: LocationService,
       private dialogService: DialogService
   ) {
-    this.locations = locationService.GetLocations();
-    this.characters = dialogService.GetCharacters();
+    //this.locations = locationService.GetLocations();
+    //this.characters = dialogService.GetCharacters();
     if(this.locations && this.characters){
       this.allowSave = true;
     }else{
@@ -31,6 +32,11 @@ export class FluxEditComponent implements OnInit {
 
   ngOnInit() {
     
+  }
+
+  UpdateDataLocal(event){
+    this.characters.save();
+    this.locations.save();
   }
 
   SaveData(){
@@ -49,6 +55,7 @@ export class FluxEditComponent implements OnInit {
       alias: '',
       label: ''
     });
+    this.UpdateDataLocal(null);
   }
 
   AddLocation(){
@@ -60,6 +67,7 @@ export class FluxEditComponent implements OnInit {
       },
       adjacentLocations: []
     });
+    this.UpdateDataLocal(null);
   }
 
 }

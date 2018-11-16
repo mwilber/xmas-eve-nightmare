@@ -2,6 +2,7 @@
     <div fxFlex="100%">
         <button mat-flat-button (click)="SaveData()" [disabled]="!allowSave">Save</button>
         <button mat-flat-button color="primary" (click)="LoadData()">Load</button>
+        <button mat-flat-button (click)="SaveDataLocal()">Save Local</button>
     </div>
 </div>
 <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
@@ -19,8 +20,8 @@
         <button mat-flat-button color="primary" (click)="AddCharacter()">Add Character</button>
         <mat-list>
             <mat-list-item *ngFor="let character of characters">
-                <mat-form-field><input matInput [(ngModel)]="character.alias" type="text" placeholder="alias"/></mat-form-field>
-                <mat-form-field><input matInput [(ngModel)]="character.label" type="text" placeholder="label"/></mat-form-field>
+                <mat-form-field><input matInput (change)="UpdateDataLocal($event)" [(ngModel)]="character.alias" type="text" placeholder="alias"/></mat-form-field>
+                <mat-form-field><input matInput (change)="UpdateDataLocal($event)" [(ngModel)]="character.label" type="text" placeholder="label"/></mat-form-field>
             </mat-list-item>
         </mat-list>
     </div>
