@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { FluxEditConversationComponent } from './flux-edit/flux-edit-conversation/flux-edit-conversation.component';
 import { MaterialModule } from '../material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { FluxAuthComponent } from './flux-edit/flux-auth/flux-auth.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MaterialModule,
     FlexLayoutModule
   ],
-  declarations: [FluxEditComponent, FluxEditLocationComponent, FluxEditDialogComponent, FluxEditConversationComponent],
+  declarations: [FluxEditComponent, FluxEditLocationComponent, FluxEditDialogComponent, FluxEditConversationComponent, FluxAuthComponent],
   exports: [FluxEditComponent]
 })
 export class FluxEditorModule { }
