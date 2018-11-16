@@ -30,6 +30,7 @@ export class FluxEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
   SaveData(){

@@ -27,12 +27,15 @@ export class FluxInterfaceComponent implements OnInit {
       conversations: []
     }
     
-    this.LoadScene(userService.GetLocation());
-    
   }
 
   ngOnInit() {
+    //console.log('[ngInit]', this.locations)
     //console.log(this.currentLocation);
+    if(this.currentScene.location){
+      this.LoadScene(this.userService.GetLocation());
+    }
+    
   }
 
   _resetScene(){
@@ -63,7 +66,7 @@ export class FluxInterfaceComponent implements OnInit {
     //   this.dialogComponant.Refresh();
     // }
 
-    console.log('currentScene', this.currentScene);
+    console.log('currentScene', alias, this.currentScene);
   }
 
 }

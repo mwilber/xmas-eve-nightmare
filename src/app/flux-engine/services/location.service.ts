@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from '../interfaces/location';
 import {environment} from '../../../environments/environment';
+import { LocalStorage } from 'ngx-store';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import {environment} from '../../../environments/environment';
 export class LocationService {
   
   httpOptions: {};
-  locations: Location[];
+  @LocalStorage() locations: Location[];
 
   constructor(private http:HttpClient) {
 

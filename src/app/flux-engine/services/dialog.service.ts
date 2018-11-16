@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Character } from '../interfaces/character';
 import { UserState } from '../interfaces/user-state';
 import {environment} from '../../../environments/environment';
+import { LocalStorage } from 'ngx-store';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class DialogService {
   httpOptions: {};
 
   //dialogTree: {};
-  characters: Character[];
-  storyScript: {};
+  @LocalStorage() characters: Character[];
+  @LocalStorage() storyScript: {};
 
   constructor(private http:HttpClient) {
 

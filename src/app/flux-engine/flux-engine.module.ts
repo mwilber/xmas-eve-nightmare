@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FluxInterfaceComponent } from './flux-interface/flux-interface.component';
 import { FluxDialogComponent } from './flux-interface/flux-dialog/flux-dialog.component';
+import { WebStorageModule } from 'ngx-store';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    WebStorageModule
   ],
   declarations: [
     FluxInterfaceComponent,
