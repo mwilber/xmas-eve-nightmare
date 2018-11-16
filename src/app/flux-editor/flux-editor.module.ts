@@ -7,8 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { FluxEditDialogComponent } from './flux-edit/flux-edit-conversation/flux-edit-dialog/flux-edit-dialog.component';
 import { RouterModule } from '@angular/router';
 import { FluxEditConversationComponent } from './flux-edit/flux-edit-conversation/flux-edit-conversation.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { MaterialModule } from '../material.module';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   imports: [
@@ -16,8 +16,8 @@ import {MatButtonModule, MatCheckboxModule} from '@angular/material';
     HttpClientModule,
     FormsModule,
     RouterModule,
-    BrowserAnimationsModule,
-    MatButtonModule, MatCheckboxModule
+    MaterialModule,
+    FlexLayoutModule
   ],
   declarations: [FluxEditComponent, FluxEditLocationComponent, FluxEditDialogComponent, FluxEditConversationComponent],
   exports: [FluxEditComponent]
