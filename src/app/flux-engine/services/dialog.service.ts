@@ -81,6 +81,34 @@ export class DialogService {
     });
   }
 
+  LoadCharactersFromFirebaseAsync(){
+    return new Promise((resolve, reject)=>{
+      this._getCharacters().subscribe(result =>{
+        console.log('load characters complete', result);
+        if( result ){
+          this.characters = result;
+        }else{
+          this.characters = [];
+        }
+        resolve();
+      });
+    });
+  }
+
+  LoadStoryFromFirebaseAsync(){
+    return new Promise((resolve, reject)=>{
+      this._getStoryScript().subscribe(result =>{
+        console.log('load story script complete', result);
+        if( result ){
+          this.storyScript = result;
+        }else{
+          this.storyScript = {};
+        }
+        resolve();
+      });
+    });
+  }
+
   GetActiveDialogForUserState(userState: UserState): any {
 
     let dialogs = {};

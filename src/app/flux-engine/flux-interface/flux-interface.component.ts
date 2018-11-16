@@ -13,9 +13,13 @@ import { FluxDialogComponent } from './flux-dialog/flux-dialog.component';
 export class FluxInterfaceComponent implements OnInit {
 
   @ViewChild(FluxDialogComponent)
-    private dialogComponant: FluxDialogComponent;
+  private dialogComponant: FluxDialogComponent;
   
   currentScene: { location: any, conversations: any[] };
+
+  locationLoaded = false;
+  charactersLoaded = false;
+  storyscriptLoaded = false;
 
   constructor(
       private userService: UserService, 
@@ -32,9 +36,23 @@ export class FluxInterfaceComponent implements OnInit {
   ngOnInit() {
     //console.log('[ngInit]', this.locations)
     //console.log(this.currentLocation);
-    if(this.currentScene.location){
+    if(this.locationService.IsDataLoaded()){
       this.LoadScene(this.userService.GetLocation());
+    }else{
+      this.LoadData();
     }
+    
+  }
+
+  LoadData(){
+    let promises = [];
+    promises.push(this.locationService.LoadFromFirebaseAsync());
+    promises.push(this.dialogService.LoadCharactersFromFirebaseAsync());
+    promises.push(this.dialogService.LoadStoryFromFirebaseAsync());
+
+    Promise.all(promises).then((result)=>{
+      this.LoadScene(this.userService.GetLocation());
+    });
     
   }
 

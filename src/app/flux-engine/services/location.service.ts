@@ -33,6 +33,14 @@ export class LocationService {
     return this.http.get<Location[]>(environment.firebaseUrl+'locations.json');
   }
 
+  IsDataLoaded(): boolean{
+    if(this.locations){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   SaveToFirebase(){
     this._putLocations().subscribe(result => {console.log('Store locations complete', result)});
   }
@@ -42,6 +50,15 @@ export class LocationService {
       console.log('load locations complete', result);
       this.locations = result;
     })
+  }
+
+  LoadFromFirebaseAsync(){
+    return new Promise((resolve, reject)=>{
+      this._getLocations().subscribe(result =>{
+        this.locations = result;
+        resolve();
+      });
+    });
   }
 
   public GetLocations(): Location[]{

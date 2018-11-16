@@ -1,14 +1,21 @@
 <div class="flux-interface">
-    <div class="location label">
-        Location: {{currentScene.location.label}}
+    <div  *ngIf="currentScene.location; else noData">
+        <div class="location label">
+            Location: {{currentScene.location.label}}
+        </div>
+        <div class="location adjacent">
+            <button 
+                *ngFor="let alias of currentScene.location.adjacentLocations"
+                (click)="LoadScene(alias)"
+            >{{alias}}</button>
+        </div>
+        <div class="stage">
+            <flux-dialog [conversations]="currentScene.conversations" (conversationExit)="HandleAction($event)"></flux-dialog>
+        </div>
     </div>
-    <div class="location adjacent">
-        <button 
-            *ngFor="let alias of currentScene.location.adjacentLocations"
-            (click)="LoadScene(alias)"
-        >{{alias}}</button>
-    </div>
-    <div class="stage">
-        <flux-dialog [conversations]="currentScene.conversations" (conversationExit)="HandleAction($event)"></flux-dialog>
-    </div>
+    
+    <ng-template #noData>
+        <h1>No story for you!</h1>
+        <h2>Just kidding, it should download in a few seconds. <br/>Hop over to the editor to download manually.</h2>
+    </ng-template>
 </div>
