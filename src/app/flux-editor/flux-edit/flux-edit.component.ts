@@ -4,6 +4,10 @@ import { Location } from 'src/app/flux-engine/interfaces/location';
 import { DialogService } from 'src/app/flux-engine/services/dialog.service';
 import { Character } from 'src/app/flux-engine/interfaces/character';
 import { LocalStorage } from 'ngx-store';
+import * as firebase from 'firebase';
+import { AuthService } from 'src/app/flux-engine/services/auth.service';
+import {MatDialog} from '@angular/material';
+import {FluxAuthComponent} from 'src/app/flux-editor/flux-edit/flux-auth/flux-auth.component';
 
 @Component({
   selector: 'flux-edit',
@@ -19,7 +23,9 @@ export class FluxEditComponent implements OnInit {
 
   constructor(
       private locationService: LocationService,
-      private dialogService: DialogService
+      private dialogService: DialogService,
+      private authService: AuthService,
+      public dialog: MatDialog
   ) {
     //this.locations = locationService.GetLocations();
     //this.characters = dialogService.GetCharacters();
@@ -31,7 +37,14 @@ export class FluxEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    firebase.initializeApp({
+      apiKey: "AIzaSyCjgUm-qJ_AITVx_oG-_xGLSj6C-u1iib0",
+    authDomain: "gzflux.firebaseapp.com",
+    databaseURL: "https://gzflux.firebaseio.com",
+    projectId: "gzflux",
+    storageBucket: "gzflux.appspot.com",
+    messagingSenderId: "1066340775057"
+    });
   }
 
   UpdateDataLocal(event){
@@ -40,8 +53,16 @@ export class FluxEditComponent implements OnInit {
   }
 
   SaveData(){
-    this.locationService.SaveToFirebase();
-    this.dialogService.SaveToFirebase();
+    if(this.authService.GetToken()){
+      this.locationService.SaveToFirebase();
+      this.dialogService.SaveToFirebase();
+    }else{
+      const dialogRef = this.dialog.open(FluxAuthComponent, {
+        width: '250px',
+        data: {}
+      });
+    }
+    
   }
 
   LoadData(){

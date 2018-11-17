@@ -20,6 +20,9 @@ import { FluxAuthComponent } from './flux-edit/flux-auth/flux-auth.component';
     MaterialModule,
     FlexLayoutModule
   ],
+  entryComponents: [
+    FluxAuthComponent
+  ],
   declarations: [FluxEditComponent, FluxEditLocationComponent, FluxEditDialogComponent, FluxEditConversationComponent, FluxAuthComponent],
   exports: [FluxEditComponent]
 })

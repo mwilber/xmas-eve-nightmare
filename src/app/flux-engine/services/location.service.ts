@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from '../interfaces/location';
 import {environment} from '../../../environments/environment';
 import { LocalStorage } from 'ngx-store';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class LocationService {
   httpOptions: {};
   @LocalStorage() locations: Location[];
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient, private authService: AuthService) {
 
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -26,8 +27,8 @@ export class LocationService {
     console.log('Location Service', this.locations);
   }
 
-  _putLocations(){
-    return this.http.put(environment.firebaseUrl+'locations.json', this.locations, this.httpOptions);
+  _putLocations(token){
+    return this.http.put(environment.firebaseUrl+'locations.json?auth='+token, this.locations, this.httpOptions);
   }
   _getLocations() {
     return this.http.get<Location[]>(environment.firebaseUrl+'locations.json');
@@ -42,7 +43,8 @@ export class LocationService {
   }
 
   SaveToFirebase(){
-    this._putLocations().subscribe(result => {console.log('Store locations complete', result)});
+    const token = this.authService.GetToken();
+    this._putLocations(token).subscribe(result => {console.log('Store locations complete', result)});
   }
 
   LoadFromFirebase(){
