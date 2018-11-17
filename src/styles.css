@@ -8,6 +8,10 @@ html, body{
     margin: 0;
 }
 
+.container{
+    padding: 20px;
+}
+
 .edit{
     float:left;
     margin: 10px;

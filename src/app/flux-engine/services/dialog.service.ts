@@ -4,6 +4,7 @@ import { Character } from '../interfaces/character';
 import { UserState } from '../interfaces/user-state';
 import {environment} from '../../../environments/environment';
 import { LocalStorage } from 'ngx-store';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class DialogService {
   @LocalStorage() characters: Character[];
   @LocalStorage() storyScript: {};
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient, private authService: AuthService) {
 
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -45,11 +46,11 @@ export class DialogService {
     return false;
   }
 
-  _putStoryScript(){
-    return this.http.put(environment.firebaseUrl+'storyscript.json', this.storyScript, this.httpOptions);
+  _putStoryScript(token){
+    return this.http.put(environment.firebaseUrl+'storyscript.json?auth='+token, this.storyScript, this.httpOptions);
   }
-  _putCharacters(){
-    return this.http.put(environment.firebaseUrl+'characters.json', this.characters, this.httpOptions);
+  _putCharacters(token){
+    return this.http.put(environment.firebaseUrl+'characters.json?auth='+token, this.characters, this.httpOptions);
   }
   _getStoryScript() {
     return this.http.get<Location[]>(environment.firebaseUrl+'storyscript.json');
@@ -59,8 +60,9 @@ export class DialogService {
   }
 
   SaveToFirebase(){
-    this._putStoryScript().subscribe(result => {console.log('Store story script complete', result)});
-    this._putCharacters().subscribe(result => {console.log('Store characters complete', result)});
+    const token = this.authService.GetToken();
+    this._putStoryScript(token).subscribe(result => {console.log('Store story script complete', result)});
+    this._putCharacters(token).subscribe(result => {console.log('Store characters complete', result)});
   }
   LoadFromFirebase(){
     this._getStoryScript().subscribe(result =>{

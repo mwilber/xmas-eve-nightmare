@@ -13,16 +13,6 @@ import {MaterialModule} from './material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
-export const firebaseConfig = {
-  apiKey: "AIzaSyCjgUm-qJ_AITVx_oG-_xGLSj6C-u1iib0",
-    authDomain: "gzflux.firebaseapp.com",
-    databaseURL: "https://gzflux.firebaseio.com",
-    projectId: "gzflux",
-    storageBucket: "gzflux.appspot.com",
-    messagingSenderId: "1066340775057"
-};
-
-
 const appRoutes: Routes = [
   {path:'editor', component:FluxEditComponent},
   {path:'editor/location/:location', component:FluxEditLocationComponent},
