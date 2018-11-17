@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from '../services/user.service';
-import { LocationService } from '../services/location.service';
-import { Location } from '../interfaces/location'
-import { DialogService } from '../services/dialog.service';
+import { UserService } from 'src/app/flux-engine/services/user.service';
+import { LocationService } from 'src/app/flux-engine/services/location.service';
+import { Location } from 'src/app/flux-engine/interfaces/location'
+import { DialogService } from 'src/app/flux-engine/services/dialog.service';
 import { FluxDialogComponent } from './flux-dialog/flux-dialog.component';
 
 @Component({

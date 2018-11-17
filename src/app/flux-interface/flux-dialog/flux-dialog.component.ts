@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
-import { DialogService } from '../../services/dialog.service';
-import { Dialog } from '../../interfaces/dialog';
+import { DialogService } from 'src/app/flux-engine/services/dialog.service';
+import { Dialog } from 'src/app/flux-engine/interfaces/dialog';
 
 @Component({
   selector: 'flux-dialog',
