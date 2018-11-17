@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LocationService } from 'src/app/flux-engine/services/location.service';
 import { Dialog } from 'src/app/flux-engine/interfaces/dialog';
 import { LocalStorage } from 'ngx-store';
+import {Location as RouterLocation} from '@angular/common';
 
 @Component({
   selector: 'flux-edit-location',
@@ -25,7 +26,8 @@ export class FluxEditLocationComponent implements OnInit {
   constructor(
     private locationService: LocationService,
     private dialogService: DialogService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _location: RouterLocation
   ) {
     this.characters = dialogService.GetCharacters();
     this.locationAliases = locationService.GetAllLocationAlias();
@@ -41,6 +43,10 @@ export class FluxEditLocationComponent implements OnInit {
       })
     }
     this.conversations = this.dialogService.GetAllDialogForLocation(this.location.alias);
+  }
+
+  NavBack() {
+    this._location.back();
   }
 
   UpdateDataLocal(event){

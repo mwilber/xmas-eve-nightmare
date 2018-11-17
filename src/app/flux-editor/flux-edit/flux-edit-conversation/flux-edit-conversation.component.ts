@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DialogService } from 'src/app/flux-engine/services/dialog.service';
 import { Character } from 'src/app/flux-engine/interfaces/character';
 import { LocalStorage } from 'ngx-store';
+import {Location as RouterLocation} from '@angular/common';
 
 @Component({
   selector: 'app-flux-edit-conversation',
@@ -17,7 +18,8 @@ export class FluxEditConversationComponent implements OnInit {
 
   constructor(
     private dialogService: DialogService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _location: RouterLocation
   ) {
     this.characters = dialogService.GetCharacters();
   }
@@ -36,6 +38,10 @@ export class FluxEditConversationComponent implements OnInit {
         }
       }
     }
+  }
+
+  NavBack() {
+    this._location.back();
   }
 
   AddTrigger(conversation){
