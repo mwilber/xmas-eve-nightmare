@@ -1,7 +1,7 @@
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%"  fxLayoutAlign="start stretch">
+<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutGap="0.5%"  fxLayoutAlign="end end">
     <div fxFlex="100%" fxFlexOffset="20px">
         <button mat-flat-button (click)="SaveData()" [disabled]="!allowSave"><mat-icon>cloud_upload</mat-icon> Cloud Save</button>
-        <button mat-flat-button color="primary" (click)="LoadData()"><mat-icon>cloud_download</mat-icon> Cloud Load</button>
+        <button mat-flat-button color="theme" (click)="LoadData()"><mat-icon>cloud_download</mat-icon> Cloud Load</button>
         <button mat-flat-button (click)="SaveDataLocal()" *ngIf="false">Save Local</button>
         
     </div>
@@ -17,7 +17,7 @@
             </mat-list>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-flat-button color="primary" (click)="AddLocation()">Add Location</button>
+            <button mat-flat-button color="primary" (click)="AddLocation()"><mat-icon>add</mat-icon> Add Location</button>
         </mat-card-actions>
     </mat-card>
     <mat-card fxFlex="50%" fxFlexOffset="20px">
@@ -31,7 +31,7 @@
             </mat-list>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-flat-button color="primary" (click)="AddCharacter()">Add Character</button>
+            <button mat-flat-button color="primary" (click)="AddCharacter()"><mat-icon>add</mat-icon> Add Character</button>
         </mat-card-actions>
     </mat-card>
 </div>

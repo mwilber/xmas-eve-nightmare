@@ -1,37 +1,64 @@
-<div class="edit location">
+<div class="location">
   <button (click)="SaveData()" style="float:right;">Save</button>
-  <a routerLink="/editor">Home</a>
-  <h1>Location</h1>
-  <label>Alias: </label><input [(ngModel)]="location.alias" type="text"/>
-  <br/>
-  <label>Label: </label><input [(ngModel)]="location.label" type="text"/>
-  <br/>
-  <br/>
-  <h2>Adjacent Locations</h2>
-  <select [(ngModel)]="newAdjacentLocation">
-    <option *ngFor="let locationAlias of locationAliases" value={{locationAlias}}>
-      {{locationAlias}}
-    </option>
-  </select>
-  <button (click)="AddAdjacentLocation()">Add Adjacent Location</button>
-  <ul>
-    <li *ngFor="let adjacent of location.adjacentLocations">
-      {{adjacent}} <button (click)="RemoveAdjacentLocation()">Delete</button>
-    </li>
-  </ul>
-  <br/>
-  <br/>
-  {{this.location.alias}}_
-  <select [(ngModel)]="newCharacter">
-    <option *ngFor="let character of characters" value= {{character.alias}}>
-        {{character.label}}
-    </option>
-  </select>_
-  <input type="text" [(ngModel)]="newLabel" placeholder="label"/>&nbsp;&nbsp;
-  {{this.location.alias+'_'+(this.newCharacter || 'n')+'_'+(this.newLabel || '')}} -> <button (click)="AddDialogTree()">Add Dialog Tree</button>
-  <br/>
-  <br/>
-  <div *ngFor="let conversation of conversations">
-    <a routerLink="/editor/conversation/{{conversation.id}}">{{conversation.id}}</a> [{{GetConversationActions(conversation)}}]
+  <a mat-icon-button routerLink="/editor"><mat-icon>arrow_back</mat-icon></a>
+
+  <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="start stretch">
+      
+    <mat-card>
+      <mat-card-title>Location</mat-card-title>
+      <mat-card-content>
+        <mat-form-field><input matInput [(ngModel)]="location.alias" type="text" placeholder="Alias"/></mat-form-field>
+        <br/>
+        <mat-form-field><label>Label: </label><input matInput [(ngModel)]="location.label" type="text" placeholder="Label"/></mat-form-field>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>Adjacent Locations</mat-card-title>
+      <mat-card-content>
+          <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="start stretch">
+          <mat-form-field>
+            <mat-select [(ngModel)]="newAdjacentLocation">
+              <mat-option *ngFor="let locationAlias of locationAliases" [value]="locationAlias">
+                {{locationAlias}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-icon-button (click)="AddAdjacentLocation()"><mat-icon>add</mat-icon></button>
+          </div>
+          <ul>
+            <li *ngFor="let adjacent of location.adjacentLocations">
+              {{adjacent}} <button mat-icon-button color="accent" (click)="RemoveAdjacentLocation()"><mat-icon>delete</mat-icon></button>
+            </li>
+          </ul>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>Conversations</mat-card-title>
+      <mat-card-content>
+        <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="end end">
+        <mat-form-field>
+          <mat-select [(ngModel)]="newCharacter" placeholder="Character">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let character of characters" [value]="character.alias">
+              {{character.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="newLabel" placeholder="Label"/>&nbsp;&nbsp;
+        </mat-form-field>
+        </div>
+        <button mat-raised-button (click)="AddDialogTree()"><mat-icon>add</mat-icon> {{this.location.alias+'_'+(this.newCharacter || 'n')+'_'+(this.newLabel || '')}}</button>
+        <br/><br/>
+        <mat-divider></mat-divider>
+        <br/><br/>
+        <div *ngFor="let conversation of conversations">
+          <a mat-button color="accent" routerLink="/editor/conversation/{{conversation.id}}"><mat-icon>speaker_notes</mat-icon> {{conversation.id}}</a> [{{GetConversationActions(conversation)}}]
+        </div>
+      </mat-card-content>
+    </mat-card>
+
   </div>
 </div>
