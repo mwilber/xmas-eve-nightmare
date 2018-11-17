@@ -4,6 +4,7 @@ import { Location } from 'src/app/flux-engine/interfaces/location';
 import { ActivatedRoute } from '@angular/router';
 import { LocationService } from 'src/app/flux-engine/services/location.service';
 import { Dialog } from 'src/app/flux-engine/interfaces/dialog';
+import { LocalStorage } from 'ngx-store';
 
 @Component({
   selector: 'flux-edit-location',
@@ -12,7 +13,8 @@ import { Dialog } from 'src/app/flux-engine/interfaces/dialog';
 })
 export class FluxEditLocationComponent implements OnInit {
 
-  @Input() location: Location;
+  @LocalStorage() locations;
+  location: Location;
   locationAliases: string[];
   conversations;
   characters;
@@ -31,9 +33,18 @@ export class FluxEditLocationComponent implements OnInit {
 
   ngOnInit() {
     if(this.route.snapshot.params['location']){
-      this.location = this.locationService.GetLocation(this.route.snapshot.params['location']);
+      //this.location = this.locationService.GetLocation(this.route.snapshot.params['location']);
+      this.location = this.locations.find((location)=>{
+        if(location.alias === this.route.snapshot.params['location']){
+          return location;
+        }
+      })
     }
     this.conversations = this.dialogService.GetAllDialogForLocation(this.location.alias);
+  }
+
+  UpdateDataLocal(event){
+    this.locations.save();
   }
 
   AddAdjacentLocation(){
@@ -44,6 +55,7 @@ export class FluxEditLocationComponent implements OnInit {
     if(this.newAdjacentLocation){
       this.location.adjacentLocations.push(this.newAdjacentLocation);
     }
+    this.UpdateDataLocal(null);
   }
 
   AddDialogTree(){
@@ -63,6 +75,7 @@ export class FluxEditLocationComponent implements OnInit {
         }
       }
     );
+    this.UpdateDataLocal(null);
   }
 
   GetConversationActions(conversation){

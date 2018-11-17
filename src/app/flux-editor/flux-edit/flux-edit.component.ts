@@ -53,6 +53,7 @@ export class FluxEditComponent implements OnInit {
   }
 
   SaveData(){
+    
     if(this.authService.GetToken()){
       this.locationService.SaveToFirebase();
       this.dialogService.SaveToFirebase();
