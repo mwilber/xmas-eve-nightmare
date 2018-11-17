@@ -75,7 +75,8 @@ export class FluxEditComponent implements OnInit {
   AddCharacter(){
     this.characters.push({
       alias: '',
-      label: ''
+      label: '',
+      inanimate: false
     });
     this.UpdateDataLocal(null);
   }

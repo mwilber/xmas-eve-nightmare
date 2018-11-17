@@ -27,6 +27,12 @@
                 <mat-list-item *ngFor="let character of characters">
                     <mat-form-field><input matInput (change)="UpdateDataLocal($event)" [(ngModel)]="character.alias" type="text" placeholder="alias"/></mat-form-field>
                     <mat-form-field><input matInput (change)="UpdateDataLocal($event)" [(ngModel)]="character.label" type="text" placeholder="label"/></mat-form-field>
+                    <mat-form-field>
+                        <select matNativeControl (change)="UpdateDataLocal($event)" [(ngModel)]="character.inanimate" placeholder="Type">
+                            <option value="false">Character</option>
+                            <option value="true">Prop</option>
+                        </select>
+                    </mat-form-field>
                 </mat-list-item>
             </mat-list>
         </mat-card-content>
