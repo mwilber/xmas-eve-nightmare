@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Dialog } from 'src/app/flux-engine/interfaces/dialog';
 
 @Component({
@@ -10,9 +10,15 @@ export class FluxEditDialogComponent implements OnInit {
 
   @Input() dialog: Dialog;
 
+  @Output() changed = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ReportDirty(){
+    this.changed.emit('dirty');
   }
 
   AddAction(){
@@ -41,6 +47,7 @@ export class FluxEditDialogComponent implements OnInit {
       }
     );
     console.log('child added', this.dialog);
+    this.ReportDirty();
   }
 
 }

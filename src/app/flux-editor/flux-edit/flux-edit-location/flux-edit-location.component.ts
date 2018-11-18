@@ -4,6 +4,8 @@ import { Location } from 'src/app/flux-engine/interfaces/location';
 import { ActivatedRoute } from '@angular/router';
 import { LocationService } from 'src/app/flux-engine/services/location.service';
 import { Dialog } from 'src/app/flux-engine/interfaces/dialog';
+import { LocalStorage } from 'ngx-store';
+import {Location as RouterLocation} from '@angular/common';
 
 @Component({
   selector: 'flux-edit-location',
@@ -12,28 +14,58 @@ import { Dialog } from 'src/app/flux-engine/interfaces/dialog';
 })
 export class FluxEditLocationComponent implements OnInit {
 
-  @Input() location: Location;
+  @LocalStorage() locations;
+  location: Location;
+  locationAliases: string[];
   conversations;
   characters;
   newCharacter;
   newLabel;
+  newAdjacentLocation;
 
   constructor(
     private locationService: LocationService,
     private dialogService: DialogService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _location: RouterLocation
   ) {
     this.characters = dialogService.GetCharacters();
+    this.locationAliases = locationService.GetAllLocationAlias();
   }
 
   ngOnInit() {
     if(this.route.snapshot.params['location']){
-      this.location = this.locationService.GetLocation(this.route.snapshot.params['location']);
+      //this.location = this.locationService.GetLocation(this.route.snapshot.params['location']);
+      this.location = this.locations.find((location)=>{
+        if(location.alias === this.route.snapshot.params['location']){
+          return location;
+        }
+      })
     }
     this.conversations = this.dialogService.GetAllDialogForLocation(this.location.alias);
   }
 
+  NavBack() {
+    this._location.back();
+  }
+
+  UpdateDataLocal(event){
+    this.locations.save();
+  }
+
+  AddAdjacentLocation(){
+    // Set up the array of it loads in as null
+    if(!this.location.adjacentLocations){
+      this.location.adjacentLocations = [];
+    }
+    if(this.newAdjacentLocation){
+      this.location.adjacentLocations.push(this.newAdjacentLocation);
+    }
+    this.UpdateDataLocal(null);
+  }
+
   AddDialogTree(){
+    //debugger;
     this.conversations.push(
       {
         id: this.location.alias+'_'+(this.newCharacter || 'n')+'_'+(this.newLabel || ''),
@@ -49,6 +81,7 @@ export class FluxEditLocationComponent implements OnInit {
         }
       }
     );
+    this.UpdateDataLocal(null);
   }
 
   GetConversationActions(conversation){

@@ -7,15 +7,23 @@ import { FormsModule } from '@angular/forms';
 import { FluxEditDialogComponent } from './flux-edit/flux-edit-conversation/flux-edit-dialog/flux-edit-dialog.component';
 import { RouterModule } from '@angular/router';
 import { FluxEditConversationComponent } from './flux-edit/flux-edit-conversation/flux-edit-conversation.component';
+import { MaterialModule } from '../material.module';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import { FluxAuthComponent } from './flux-edit/flux-auth/flux-auth.component';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    MaterialModule,
+    FlexLayoutModule
   ],
-  declarations: [FluxEditComponent, FluxEditLocationComponent, FluxEditDialogComponent, FluxEditConversationComponent],
+  entryComponents: [
+    FluxAuthComponent
+  ],
+  declarations: [FluxEditComponent, FluxEditLocationComponent, FluxEditDialogComponent, FluxEditConversationComponent, FluxAuthComponent],
   exports: [FluxEditComponent]
 })
 export class FluxEditorModule { }
