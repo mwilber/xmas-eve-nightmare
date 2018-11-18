@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Character } from '../interfaces/character';
 import { UserState } from '../interfaces/user-state';
 import {environment} from '../../../environments/environment';
+import { LocalStorage } from 'ngx-store';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +14,10 @@ export class DialogService {
   httpOptions: {};
 
   //dialogTree: {};
-  characters: Character[];
-  storyScript: {};
+  @LocalStorage() characters: Character[];
+  @LocalStorage() storyScript: {};
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient, private authService: AuthService) {
 
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -24,100 +26,8 @@ export class DialogService {
       })
     };
 
-    this.characters = [];
-    this.storyScript = {};
-
-    // this.characters = [
-    //   {
-    //     alias: 'mike',
-    //     label: 'Michael J. Nelson'
-    //   },
-    //   {
-    //     alias: 'kevin',
-    //     label: 'Kevin Murphy'
-    //   },
-    //   {
-    //     alias: 'bill',
-    //     label: 'William Combett III'
-    //   }
-    // ];
-
-    // this.storyScript = {
-    //   room1: [
-    //     {
-    //       id: 'room1_n_bkg',
-    //       character: '',
-    //       location: 'room1',
-    //       triggers: null,
-    //       dialog: {
-    //         id: '001_001',
-    //         label: '',
-    //         content: 'You are in a dark and stormy room.',
-    //         actions: null,
-    //         children: []
-    //       }
-    //     },
-    //     {
-    //       id: 'room1_n_bkg_2',
-    //       character: '',
-    //       location: 'room1',
-    //       triggers: ['room1_mike_intro'],
-    //       dialog: {
-    //         id: '001_001',
-    //         label: '',
-    //         content: 'Ah. I see you have met the gang.',
-    //         actions: null,
-    //         children: []
-    //       }
-    //     },
-    //     {
-    //       id: 'room1_mike_intro',
-    //       character: 'mike',
-    //       location: 'room1',
-    //       triggers: null,
-    //       dialog: {
-    //         id: '001_001',
-    //         label: '',
-    //         content: 'Hi. I\'m mike. This is my brother Kevin. And this is my other brother bill',
-    //         actions: null,
-    //         children: [{
-    //           id: '002_001',
-    //           label: 'I love you all.',
-    //           content: 'We too are fond of you',
-    //           actions: [
-    //             {
-    //               name: 'key',
-    //               prop: 'room1_mike_intro'
-    //             }
-    //           ],
-    //           children: []
-    //         },
-    //         {
-    //           id: '002_002',
-    //           label: 'I don\'t like you.',
-    //           content: 'We are ashamed.',
-    //           actions: null,
-    //           children: []
-    //         }]
-    //       }
-    //     }
-    //   ],
-    //   room2: [
-    //     {
-    //       id: 'room2_n_bkg',
-    //       character: '',
-    //       location: 'room2',
-    //       triggers: null,
-    //       dialog: {
-    //         id: '001_001',
-    //         label: '',
-    //         content: 'You are in a less stormy, and quasi-dark room.',
-    //         actions: null,
-    //         children: []
-    //       }
-    //     }
-    //   ]
-    // };
+    this.characters = null;
+    this.storyScript = null;
 
   }
 
@@ -136,11 +46,11 @@ export class DialogService {
     return false;
   }
 
-  _putStoryScript(){
-    return this.http.put(environment.firebaseUrl+'storyscript.json', this.storyScript, this.httpOptions);
+  _putStoryScript(token){
+    return this.http.put(environment.firebaseUrl+'storyscript.json?auth='+token, this.storyScript, this.httpOptions);
   }
-  _putCharacters(){
-    return this.http.put(environment.firebaseUrl+'characters.json', this.characters, this.httpOptions);
+  _putCharacters(token){
+    return this.http.put(environment.firebaseUrl+'characters.json?auth='+token, this.characters, this.httpOptions);
   }
   _getStoryScript() {
     return this.http.get<Location[]>(environment.firebaseUrl+'storyscript.json');
@@ -150,17 +60,54 @@ export class DialogService {
   }
 
   SaveToFirebase(){
-    this._putStoryScript().subscribe(result => {console.log('Store story script complete', result)});
-    this._putCharacters().subscribe(result => {console.log('Store characters complete', result)});
+    const token = this.authService.GetToken();
+    this._putStoryScript(token).subscribe(result => {console.log('Store story script complete', result)});
+    this._putCharacters(token).subscribe(result => {console.log('Store characters complete', result)});
   }
   LoadFromFirebase(){
     this._getStoryScript().subscribe(result =>{
       console.log('load story script complete', result);
-      this.storyScript = result;
+      if( result ){
+        this.storyScript = result;
+      }else{
+        this.storyScript = {};
+      }
     });
     this._getCharacters().subscribe(result =>{
       console.log('load characters complete', result);
-      this.characters = result;
+      if( result ){
+        this.characters = result;
+      }else{
+        this.characters = [];
+      }
+    });
+  }
+
+  LoadCharactersFromFirebaseAsync(){
+    return new Promise((resolve, reject)=>{
+      this._getCharacters().subscribe(result =>{
+        console.log('load characters complete', result);
+        if( result ){
+          this.characters = result;
+        }else{
+          this.characters = [];
+        }
+        resolve();
+      });
+    });
+  }
+
+  LoadStoryFromFirebaseAsync(){
+    return new Promise((resolve, reject)=>{
+      this._getStoryScript().subscribe(result =>{
+        console.log('load story script complete', result);
+        if( result ){
+          this.storyScript = result;
+        }else{
+          this.storyScript = {};
+        }
+        resolve();
+      });
     });
   }
 
@@ -169,14 +116,16 @@ export class DialogService {
     let dialogs = {};
 
     console.log('userState', userState);
-    if( this.storyScript.hasOwnProperty(userState.location) ){
-      for( let interaction of this.storyScript[userState.location]){
-        // Validate here
-        if( this._validateInteraction(userState, interaction) ){
-          if( interaction.character ){
-              dialogs[interaction.character] = interaction.dialog;
-          }else{
-            dialogs['narrator'] = interaction.dialog;
+    if( this.storyScript ){
+      if( this.storyScript.hasOwnProperty(userState.location) ){
+        for( let interaction of this.storyScript[userState.location]){
+          // Validate here
+          if( this._validateInteraction(userState, interaction) ){
+            if( interaction.character ){
+                dialogs[interaction.character] = interaction.dialog;
+            }else{
+              dialogs['narrator'] = interaction.dialog;
+            }
           }
         }
       }
@@ -187,6 +136,10 @@ export class DialogService {
   }
 
   GetAllDialogForLocation(roomAlias: string){
+    // Inject an empty room reference if none exists
+    if(!this.storyScript.hasOwnProperty(roomAlias)){
+      this.storyScript[roomAlias] = [];
+    }
     return this.storyScript[roomAlias];
   }
 
@@ -218,9 +171,19 @@ export class DialogService {
   }
   
   GetCharacter(alias: string): Character{
-    if( this.characters.hasOwnProperty(alias) ){
-      return this.characters[alias];
+    // if( this.characters.hasOwnProperty(alias) ){
+    //   return this.characters[alias];
+    // }
+    let result = this.characters.find((character)=>character.alias === alias);
+    // If nothing is found, default to the narrator
+    if(!result){
+      result = {
+        alias: 'narrator',
+        inanimate: false,
+        label: 'Narrator'
+      }
     }
+    return result;
   }
 
   GetCharacters(){

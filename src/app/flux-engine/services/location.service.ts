@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from '../interfaces/location';
 import {environment} from '../../../environments/environment';
+import { LocalStorage } from 'ngx-store';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +11,9 @@ import {environment} from '../../../environments/environment';
 export class LocationService {
   
   httpOptions: {};
-  locations: Location[];
+  @LocalStorage() locations: Location[];
 
-  constructor(private http:HttpClient) {
+  constructor(private http:HttpClient, private authService: AuthService) {
 
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -20,59 +22,29 @@ export class LocationService {
       })
     };
 
-    this.locations = [];
-
-    // this.locations = [
-    //   {
-    //     alias: 'room1', 
-    //     label: 'Room One', 
-    //     scene: {
-    //       dialog: [
-    //         'room1_n',
-    //         'room1_mike_intro'
-    //       ]
-    //     },
-    //     adjacentLocations: [
-    //       'room2'
-    //     ]
-    //   },
-    //   {
-    //     alias: 'room2', 
-    //     label: 'Room Two', 
-    //     scene: {
-    //       dialog: [
-    //         'room2_n'
-    //       ]
-    //     },
-    //     adjacentLocations: [
-    //       'room1',
-    //       'room3'
-    //     ]
-    //   },
-    //   {
-    //     alias: 'room3', 
-    //     label: 'Room Three', 
-    //     scene: {
-    //       dialog: []
-    //     },
-    //     adjacentLocations: [
-    //       'room2'
-    //     ]
-    //   }
-    // ]
+    this.locations = null;
 
     console.log('Location Service', this.locations);
   }
 
-  _putLocations(){
-    return this.http.put(environment.firebaseUrl+'locations.json', this.locations, this.httpOptions);
+  _putLocations(token){
+    return this.http.put(environment.firebaseUrl+'locations.json?auth='+token, this.locations, this.httpOptions);
   }
   _getLocations() {
     return this.http.get<Location[]>(environment.firebaseUrl+'locations.json');
   }
 
+  IsDataLoaded(): boolean{
+    if(this.locations){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   SaveToFirebase(){
-    this._putLocations().subscribe(result => {console.log('Store locations complete', result)});
+    const token = this.authService.GetToken();
+    this._putLocations(token).subscribe(result => {console.log('Store locations complete', result)});
   }
 
   LoadFromFirebase(){
@@ -82,14 +54,30 @@ export class LocationService {
     })
   }
 
+  LoadFromFirebaseAsync(){
+    return new Promise((resolve, reject)=>{
+      this._getLocations().subscribe(result =>{
+        this.locations = result;
+        resolve();
+      });
+    });
+  }
+
   public GetLocations(): Location[]{
     return this.locations;
   }
 
+  public GetAllLocationAlias(): string[]{
+    let locationAliases = this.locations.map((location)=>{return location.alias});
+    return locationAliases;
+  }
+
   public GetLocation(alias: string): Location{
-    for( let location of this.locations ){
-      if( location.alias === alias ){
-        return location;
+    if( this.locations ){
+      for( let location of this.locations ){
+        if( location.alias === alias ){
+          return location;
+        }
       }
     }
     return null;

@@ -1,18 +1,43 @@
-<div class="edit">
-  <button (click)="SaveData()">Save</button>
-  <button (click)="LoadData()">Load</button>
-  <h1>Locations</h1>
-  <ul>
-      <li *ngFor="let location of locations">
-          <a routerLink="/editor/location/{{location.alias}}">{{location.alias}}</a>
-      </li>
-  </ul>
-  <h1>Characters</h1>
-  <button (click)="AddCharacter()">Add Character</button>
-  <ul>
-      <li *ngFor="let character of characters">
-          <label>Alias: </label><input [(ngModel)]="character.alias" type="text"/>
-          <label>Label: </label><input [(ngModel)]="character.label" type="text"/>
-      </li>
-  </ul>
+<div class="container" fxLayout="column" fxLayout.xs="column" fxLayoutGap="0.5%"  fxLayoutAlign="end end">
+    <div fxFlex="100%" fxFlexOffset="20px">
+        <button mat-flat-button (click)="SaveData()" [disabled]="!allowSave"><mat-icon>cloud_upload</mat-icon> Cloud Save</button>
+        <button mat-flat-button color="theme" (click)="LoadData()"><mat-icon>cloud_download</mat-icon> Cloud Load</button>
+        <button mat-flat-button (click)="SaveDataLocal()" *ngIf="false">Save Local</button>
+        
+    </div>
+</div>
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="start stretch">
+    <mat-card fxFlex="50%" fxFlexOffset="20px">
+        <mat-card-title>Locations</mat-card-title>
+        <mat-card-content>
+            <mat-list>
+                <mat-list-item *ngFor="let location of locations">
+                    <a mat-stroked-button color="accent" routerLink="/editor/location/{{location.alias}}"><mat-icon>pageview</mat-icon> {{location.alias}}</a>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-flat-button color="primary" (click)="AddLocation()"><mat-icon>add</mat-icon> Add Location</button>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card fxFlex="50%" fxFlexOffset="20px">
+        <mat-card-title>Characters</mat-card-title>
+        <mat-card-content>
+            <mat-list>
+                <mat-list-item *ngFor="let character of characters">
+                    <mat-form-field><input matInput (change)="UpdateDataLocal($event)" [(ngModel)]="character.alias" type="text" placeholder="alias"/></mat-form-field>
+                    <mat-form-field><input matInput (change)="UpdateDataLocal($event)" [(ngModel)]="character.label" type="text" placeholder="label"/></mat-form-field>
+                    <mat-form-field>
+                        <select matNativeControl (change)="UpdateDataLocal($event)" [(ngModel)]="character.inanimate" placeholder="Type">
+                            <option value="false">Character</option>
+                            <option value="true">Prop</option>
+                        </select>
+                    </mat-form-field>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-flat-button color="primary" (click)="AddCharacter()"><mat-icon>add</mat-icon> Add Character</button>
+        </mat-card-actions>
+    </mat-card>
 </div>

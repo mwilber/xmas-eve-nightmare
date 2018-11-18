@@ -1,9 +1,14 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Preview</a>
-  <a routerLink="/editor" routerLinkActive="active">Edit</a>
+  <mat-toolbar color="primary" class="mat-elevation-z5">
+    <h1>
+      {{ title }}
+    </h1>
+  </mat-toolbar>
+  <nav mat-tab-nav-bar color="primary">
+    <a mat-tab-link [routerLink]="'/'" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive" [routerLinkActiveOptions]="{exact:true}">Preview</a>
+    <a mat-tab-link [routerLink]="'/editor'" routerLinkActive #rlb="routerLinkActive" [active]="rlb.isActive">Edit</a>
+  </nav>
+  
 </div>
 <router-outlet></router-outlet>

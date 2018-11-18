@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from '../services/user.service';
-import { LocationService } from '../services/location.service';
-import { Location } from '../interfaces/location'
-import { DialogService } from '../services/dialog.service';
+import { UserService } from 'src/app/flux-engine/services/user.service';
+import { LocationService } from 'src/app/flux-engine/services/location.service';
+import { Location } from 'src/app/flux-engine/interfaces/location'
+import { DialogService } from 'src/app/flux-engine/services/dialog.service';
 import { FluxDialogComponent } from './flux-dialog/flux-dialog.component';
 
 @Component({
@@ -13,9 +13,13 @@ import { FluxDialogComponent } from './flux-dialog/flux-dialog.component';
 export class FluxInterfaceComponent implements OnInit {
 
   @ViewChild(FluxDialogComponent)
-    private dialogComponant: FluxDialogComponent;
+  private dialogComponant: FluxDialogComponent;
   
   currentScene: { location: any, conversations: any[] };
+
+  locationLoaded = false;
+  charactersLoaded = false;
+  storyscriptLoaded = false;
 
   constructor(
       private userService: UserService, 
@@ -27,12 +31,29 @@ export class FluxInterfaceComponent implements OnInit {
       conversations: []
     }
     
-    this.LoadScene(userService.GetLocation());
-    
   }
 
   ngOnInit() {
+    //console.log('[ngInit]', this.locations)
     //console.log(this.currentLocation);
+    if(this.locationService.IsDataLoaded()){
+      this.LoadScene(this.userService.GetLocation());
+    }else{
+      this.LoadData();
+    }
+    
+  }
+
+  LoadData(){
+    let promises = [];
+    promises.push(this.locationService.LoadFromFirebaseAsync());
+    promises.push(this.dialogService.LoadCharactersFromFirebaseAsync());
+    promises.push(this.dialogService.LoadStoryFromFirebaseAsync());
+
+    Promise.all(promises).then((result)=>{
+      this.LoadScene(this.userService.GetLocation());
+    });
+    
   }
 
   _resetScene(){
@@ -63,7 +84,7 @@ export class FluxInterfaceComponent implements OnInit {
     //   this.dialogComponant.Refresh();
     // }
 
-    console.log('currentScene', this.currentScene);
+    console.log('currentScene', alias, this.currentScene);
   }
 
 }

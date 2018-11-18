@@ -1,4 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Material */
+@import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* Global Styles */
+html, body{
+    margin: 0;
+}
+
+.container{
+    padding: 10px 20px;
+}
+
 .edit{
     float:left;
     margin: 10px;
