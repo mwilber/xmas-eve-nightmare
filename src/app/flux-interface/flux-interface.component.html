@@ -1,18 +1,18 @@
-<div class="flux-interface">
-    <div  *ngIf="currentScene.location; else noData">
-        <div class="location label">
-            Location: {{currentScene.location.label}}
-        </div>
-        <div class="location adjacent">
-            <button 
+<div class="flux-interface container" fxLayout="column" fxLayout.xs="column" fxLayoutGap="0.5%"  fxLayoutAlign="center">
+    <mat-card  *ngIf="currentScene.location; else noData">
+        <mat-card-title class="location label">
+            {{currentScene.location.label}}
+        </mat-card-title>
+        <mat-card-content class="stage">
+            <flux-dialog [conversations]="currentScene.conversations" (conversationExit)="HandleAction($event)"></flux-dialog>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary"
                 *ngFor="let alias of currentScene.location.adjacentLocations"
                 (click)="LoadScene(alias)"
             >{{alias}}</button>
-        </div>
-        <div class="stage">
-            <flux-dialog [conversations]="currentScene.conversations" (conversationExit)="HandleAction($event)"></flux-dialog>
-        </div>
-    </div>
+        </mat-card-actions>
+    </mat-card>
     
     <ng-template #noData>
         <h1>No story for you!</h1>
