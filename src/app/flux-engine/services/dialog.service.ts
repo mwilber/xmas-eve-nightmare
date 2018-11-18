@@ -171,9 +171,19 @@ export class DialogService {
   }
   
   GetCharacter(alias: string): Character{
-    if( this.characters.hasOwnProperty(alias) ){
-      return this.characters[alias];
+    // if( this.characters.hasOwnProperty(alias) ){
+    //   return this.characters[alias];
+    // }
+    let result = this.characters.find((character)=>character.alias === alias);
+    // If nothing is found, default to the narrator
+    if(!result){
+      result = {
+        alias: 'narrator',
+        inanimate: false,
+        label: 'Narrator'
+      }
     }
+    return result;
   }
 
   GetCharacters(){

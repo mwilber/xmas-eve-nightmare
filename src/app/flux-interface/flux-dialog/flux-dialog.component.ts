@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { DialogService } from 'src/app/flux-engine/services/dialog.service';
 import { Dialog } from 'src/app/flux-engine/interfaces/dialog';
+import { Character } from 'src/app/flux-engine/interfaces/character';
 
 @Component({
   selector: 'flux-dialog',
@@ -13,9 +14,9 @@ export class FluxDialogComponent implements OnInit {
   @Output() conversationExit = new EventEmitter();
   selectedCharacter: string;
   activeDialog: Dialog;
-  availableCharacters: string[];
+  availableCharacters: Character[];
 
-  constructor() {
+  constructor(private dialogService: DialogService) {
     this.selectedCharacter = '';
     this.activeDialog = null;
   }
@@ -42,7 +43,7 @@ export class FluxDialogComponent implements OnInit {
     let characterProps = Object.keys(this.conversations);
     for (let prop of characterProps) { 
       if(this.conversations.hasOwnProperty(prop)){
-        this.availableCharacters.push(prop);
+        this.availableCharacters.push(this.dialogService.GetCharacter(prop));
       }
     }
   }

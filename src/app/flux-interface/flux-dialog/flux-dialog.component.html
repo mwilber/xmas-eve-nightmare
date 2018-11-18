@@ -1,9 +1,14 @@
 <div class="dialog-component">
   <div class="character-list">
     <button mat-flat-button color="accent"
-        *ngFor="let characterAlias of availableCharacters"
-        (click)="SetActiveCharacter(characterAlias)"
-    >{{characterAlias}}</button>
+        *ngFor="let character of availableCharacters"
+        (click)="SetActiveCharacter(character.alias)"
+    >
+      <mat-icon *ngIf="!character.inanimate && character.alias==='narrator'">notes</mat-icon>  
+      <mat-icon *ngIf="!character.inanimate && character.alias!=='narrator'">person</mat-icon>
+      <mat-icon *ngIf="character.inanimate">search</mat-icon>
+      &nbsp;{{character.label}}
+    </button>
   </div>
   
   <div class="dialog-content" *ngIf="activeDialog.hasOwnProperty('content')">
