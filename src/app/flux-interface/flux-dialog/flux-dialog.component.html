@@ -1,28 +1,31 @@
+<!-- *ngFor="let character of availableCharacters"
+        (click)="SetActiveCharacter(character.alias)" -->
+
 <div class="dialog-component">
-  <div class="character-list">
-    <button mat-flat-button color="accent"
-        *ngFor="let character of availableCharacters"
-        (click)="SetActiveCharacter(character.alias)"
-    >
-      <mat-icon *ngIf="!character.inanimate && character.alias==='narrator'">notes</mat-icon>  
-      <mat-icon *ngIf="!character.inanimate && character.alias!=='narrator'">person</mat-icon>
-      <mat-icon *ngIf="character.inanimate">search</mat-icon>
-      &nbsp;{{character.label}}
-    </button>
-  </div>
+  <mat-tab-group class="character-list"  color="accent" [selectedIndex]="0">
+    <mat-tab *ngFor="let conversationKey of conversationKeys">
+      <ng-template mat-tab-label>
+        <mat-icon *ngIf="!dialogService.GetCharacter(conversationKey).inanimate && dialogService.GetCharacter(conversationKey).alias==='narrator'">notes</mat-icon>  
+        <mat-icon *ngIf="!dialogService.GetCharacter(conversationKey).inanimate && dialogService.GetCharacter(conversationKey).alias!=='narrator'">person</mat-icon>
+        <mat-icon *ngIf="dialogService.GetCharacter(conversationKey).inanimate">search</mat-icon>
+        &nbsp;{{dialogService.GetCharacter(conversationKey).label}}
+      </ng-template>
+      <div class="dialog-content" *ngIf="conversations[conversationKey].active.hasOwnProperty('content')">
+        <p>
+          {{conversations[conversationKey].active.content}}
+        </p>
+        <div class="dialog-actions">
+          <button mat-flat-button
+            *ngFor="let child of conversations[conversationKey].active.children"
+            (click)="SetDialogNode(conversationKey, child)"
+          >{{child.label}}</button>
+          <button mat-flat-button
+            *ngIf="conversationKey !== 'narrator' && !conversations[conversationKey].active.children"
+            (click)="ReloadDialog(conversations[conversationKey].active.actions)">Exit</button>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
   
-  <div class="dialog-content" *ngIf="activeDialog.hasOwnProperty('content')">
-    <p>
-      {{activeDialog.content}}
-    </p>
-    <div class="dialog-actions">
-      <button mat-flat-button
-        *ngFor="let child of activeDialog.children"
-        (click)="SetDialogNode(child)"
-      >{{child.label}}</button>
-      <button mat-flat-button
-        *ngIf="selectedCharacter !== 'narrator' && !activeDialog.children"
-        (click)="ReloadDialog(activeDialog.actions)">Exit</button>
-    </div>
-  </div>
+
 </div>
