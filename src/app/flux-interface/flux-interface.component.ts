@@ -80,6 +80,14 @@ export class FluxInterfaceComponent implements OnInit {
 
     // Build the dialog tree
     this.currentScene.conversations = this.dialogService.GetActiveDialogForUserState(this.userService.GetUserState());
+    // Set initial active conversations
+    let conversationKeys = Object.keys(this.currentScene.conversations);
+    for(let conversationKey of conversationKeys ){
+      this.currentScene.conversations[conversationKey]['active'] = {
+        content: this.currentScene.conversations[conversationKey].content,
+        children: this.currentScene.conversations[conversationKey].children
+      };
+    }
     // if(this.dialogComponant){
     //   this.dialogComponant.Refresh();
     // }

@@ -64,6 +64,11 @@ export class FluxEditLocationComponent implements OnInit {
     this.UpdateDataLocal(null);
   }
 
+  RemoveAdjacentLocation(index){
+    this.location.adjacentLocations.splice(index,1);
+    this.UpdateDataLocal(null);
+  }
+
   AddDialogTree(){
     //debugger;
     this.conversations.push(
@@ -81,6 +86,11 @@ export class FluxEditLocationComponent implements OnInit {
         }
       }
     );
+    this.UpdateDataLocal(null);
+  }
+
+  RemoveDialogTree(index){
+    this.conversations.splice(index, 1);
     this.UpdateDataLocal(null);
   }
 

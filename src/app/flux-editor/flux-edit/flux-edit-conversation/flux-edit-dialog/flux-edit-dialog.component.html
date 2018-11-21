@@ -1,16 +1,25 @@
-<div class="edit dialog">
+<div class="">
   <!-- <label>id:</label><input [(ngModel)]="dialog.id" type="text"/> -->
-  <label>label:</label><input [(ngModel)]="dialog.label" (change)="ReportDirty($event)" type="text"/>
+  <mat-form-field class="input-full-width">
+    <input matInput placeholder="label" [(ngModel)]="dialog.label" (change)="ReportDirty($event)" type="text"/>
+  </mat-form-field>
   <br/>
-  <textarea [(ngModel)]="dialog.content" type="text" (change)="ReportDirty($event)"></textarea>
+  <mat-form-field class="input-full-width">
+      <textarea matNativeControl placeholder="Content" [(ngModel)]="dialog.content" type="text" (change)="ReportDirty($event)"></textarea>
+  </mat-form-field>
+  
   <div class="actions">
     <h3>Actions</h3>
-    <button (click)="AddAction()">Add Action</button>
+    <button mat-button color="accent" (click)="AddAction()">Add Action</button>
     <div *ngIf="dialog.actions">
       <ul>
         <li *ngFor="let action of dialog.actions; let i = index">
-          <label>Name:</label><input [(ngModel)]="dialog.actions[i].name" (change)="ReportDirty($event)" />
-          <label>Prop:</label><input [(ngModel)]="dialog.actions[i].prop" (change)="ReportDirty($event)" />
+          <mat-form-field>
+            <input matInput placeholder="name" [(ngModel)]="dialog.actions[i].name" (change)="ReportDirty($event)" />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="prop" [(ngModel)]="dialog.actions[i].prop" (change)="ReportDirty($event)" />
+          </mat-form-field>
         </li>
       </ul>
       
@@ -18,8 +27,14 @@
   </div>
   <div class="children">
     <h3>Children</h3>
-    <button (click)="AddChildDialog()">Add Child Dialog</button>
+    <button mat-button color="accent" (click)="AddChildDialog()">Add Child</button>
     <div style="clear:both;"></div>
-    <flux-edit-dialog *ngFor="let child of dialog.children" [dialog]="child" (changed)="ReportDirty($event)"></flux-edit-dialog>
+    <div class="edit dialog" *ngFor="let child of dialog.children; let didx = index" [ngStyle]="{'width': 'calc('+(100/dialog.children.length)+'% - 22px)'}">
+      <div style="float:right;">
+        <button mat-icon-button color="accent" (click)="RemoveChildDialog(didx)"><mat-icon>delete</mat-icon></button>
+      </div>
+      <flux-edit-dialog [dialog]="child" (changed)="ReportDirty($event)"></flux-edit-dialog>
+    </div>
+    
   </div>
 </div> 

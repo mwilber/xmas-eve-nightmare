@@ -15,6 +15,7 @@ export class FluxDialogComponent implements OnInit {
   selectedCharacter: string;
   activeDialog: Dialog;
   availableCharacters: Character[];
+  conversationKeys: string[];
 
   constructor(private dialogService: DialogService) {
     this.selectedCharacter = '';
@@ -22,6 +23,8 @@ export class FluxDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.conversationKeys = Object.keys(this.conversations);
+    console.log('conversationKeys', this.conversationKeys);
     
   }
 
@@ -56,8 +59,9 @@ export class FluxDialogComponent implements OnInit {
     }
   }
 
-  SetDialogNode(node: Dialog){
-    this.activeDialog = node;
+  SetDialogNode(conversationKey: string, node: Dialog){
+    //this.activeDialog = node;
+    this.conversations[conversationKey].active = node;
   }
 
   SetActiveCharacter(alias: string){
