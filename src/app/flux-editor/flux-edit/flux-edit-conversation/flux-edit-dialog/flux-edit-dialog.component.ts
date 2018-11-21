@@ -50,4 +50,9 @@ export class FluxEditDialogComponent implements OnInit {
     this.ReportDirty();
   }
 
+  RemoveChildDialog(index){
+    this.dialog.children.splice(index, 1);
+    this.ReportDirty();
+  }
+
 }

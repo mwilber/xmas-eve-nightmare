@@ -26,8 +26,8 @@
           <button mat-icon-button (click)="AddAdjacentLocation()"><mat-icon>add</mat-icon></button>
           </div>
           <ul>
-            <li *ngFor="let adjacent of location.adjacentLocations">
-              {{adjacent}} <button mat-icon-button color="accent" (click)="RemoveAdjacentLocation()"><mat-icon>delete</mat-icon></button>
+            <li *ngFor="let adjacent of location.adjacentLocations; let idx = index">
+              {{adjacent}} <button mat-icon-button color="accent" (click)="RemoveAdjacentLocation(idx)"><mat-icon>delete</mat-icon></button>
             </li>
           </ul>
       </mat-card-content>
@@ -53,8 +53,12 @@
         <br/><br/>
         <mat-divider></mat-divider>
         <br/><br/>
-        <div *ngFor="let conversation of conversations">
-          <a mat-button color="accent" routerLink="/editor/conversation/{{conversation.id}}"><mat-icon>speaker_notes</mat-icon> {{conversation.id}}</a> [{{GetConversationActions(conversation)}}]
+        <div *ngFor="let conversation of conversations; let cidx = index">
+          <a mat-button color="accent" routerLink="/editor/conversation/{{conversation.id}}">
+            <mat-icon>speaker_notes</mat-icon> {{conversation.id}}
+          </a> 
+          [{{GetConversationActions(conversation)}}] 
+          <button mat-icon-button color="accent" (click)="RemoveDialogTree(cidx)"><mat-icon>delete</mat-icon></button>
         </div>
       </mat-card-content>
     </mat-card>
