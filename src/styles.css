@@ -8,6 +8,10 @@ html, body{
     margin: 0;
 }
 
+.input-full-width{
+    width: 100%;
+}
+
 .container{
     padding: 10px 20px;
 }
@@ -21,9 +25,13 @@ html, body{
     background: rgba(0,0,0,0.1);
 }
 
+.edit.dialog{
+    margin: 0;
+}
+
 .edit.dialog .edit.dialog{
     float: left;
-    width: calc(50% - 42px);
+    margin: 0;
 }
 
 .edit.dialog textarea{
