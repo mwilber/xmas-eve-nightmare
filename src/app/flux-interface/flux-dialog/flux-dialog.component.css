@@ -4,6 +4,6 @@
     border: solid 1px #ccc;
 } */
 
-.dialog-content{ 
-    
+.dialog-content .mat-flat-button{ 
+    margin-right: 8px;
 }
