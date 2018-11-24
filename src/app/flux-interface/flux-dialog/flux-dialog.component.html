@@ -5,9 +5,9 @@
   <mat-tab-group class="character-list"  color="accent" [selectedIndex]="0">
     <mat-tab *ngFor="let conversationKey of conversationKeys">
       <ng-template mat-tab-label>
-        <mat-icon *ngIf="dialogService.GetCharacter(conversationKey).inanimate === 'false' && dialogService.GetCharacter(conversationKey).alias==='narrator'">notes</mat-icon>  
-        <mat-icon *ngIf="dialogService.GetCharacter(conversationKey).inanimate === 'false' && dialogService.GetCharacter(conversationKey).alias!=='narrator'">person</mat-icon>
-        <mat-icon *ngIf="dialogService.GetCharacter(conversationKey).inanimate === 'true'">search</mat-icon>
+        <mat-icon *ngIf="dialogService.GetCharacter(conversationKey).icon === 'narrator'">notes</mat-icon>  
+        <mat-icon *ngIf="dialogService.GetCharacter(conversationKey).icon === 'character'">person</mat-icon>
+        <mat-icon *ngIf="dialogService.GetCharacter(conversationKey).icon === 'prop'">search</mat-icon>
         &nbsp;{{dialogService.GetCharacter(conversationKey).label}}
       </ng-template>
       <div class="dialog-content" *ngIf="conversations[conversationKey].active.hasOwnProperty('content')">

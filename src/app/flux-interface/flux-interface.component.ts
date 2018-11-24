@@ -77,7 +77,6 @@ export class FluxInterfaceComponent implements OnInit {
     this._resetScene();
     this.userService.SetLocation(alias);
     this.currentScene.location = this.locationService.GetLocation(this.userService.GetLocation());
-
     // Build the dialog tree
     this.currentScene.conversations = this.dialogService.GetActiveDialogForUserState(this.userService.GetUserState());
     // Set initial active conversations
