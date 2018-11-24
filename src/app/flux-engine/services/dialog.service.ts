@@ -180,7 +180,14 @@ export class DialogService {
       result = {
         alias: 'narrator',
         inanimate: false,
-        label: 'Narrator'
+        label: 'Narrator',
+        icon: 'narrator'
+      }
+    }else if(typeof result === 'object'){
+      if(result.hasOwnProperty('inanimate')){
+        result.inanimate = JSON.parse(result.inanimate);
+        if(result.inanimate) result.icon = 'prop';
+        if(!result.inanimate) result.icon = 'character';
       }
     }
     return result;
