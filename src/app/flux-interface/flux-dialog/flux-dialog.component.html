@@ -2,7 +2,7 @@
         (click)="SetActiveCharacter(character.alias)" -->
 
 <div class="dialog-component">
-  <mat-tab-group class="character-list"  color="accent" [selectedIndex]="0">
+  <mat-tab-group class="character-list"  color="accent" [(selectedIndex)]="selectedTab">
     <mat-tab *ngFor="let conversationKey of conversationKeys">
       <ng-template mat-tab-label>
         <mat-icon *ngIf="dialogService.GetCharacter(conversationKey).icon === 'narrator'">notes</mat-icon>  

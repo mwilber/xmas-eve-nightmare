@@ -13,6 +13,7 @@ export class FluxDialogComponent implements OnInit {
   @Input() conversations;
   @Output() conversationExit = new EventEmitter();
   selectedCharacter: string;
+  selectedTab: number;
   activeDialog: Dialog;
   availableCharacters: Character[];
   conversationKeys: string[];
@@ -20,6 +21,7 @@ export class FluxDialogComponent implements OnInit {
   constructor(private dialogService: DialogService) {
     this.selectedCharacter = '';
     this.activeDialog = null;
+    this.selectedTab = 0;
   }
 
   ngOnInit() {
@@ -34,6 +36,7 @@ export class FluxDialogComponent implements OnInit {
 
   ReloadDialog(actions){
     this.SetActiveCharacter('narrator');
+    this.selectedTab = 0;
     // TODO: Trigger a tree reload
     this.conversationExit.emit(actions);
   }
