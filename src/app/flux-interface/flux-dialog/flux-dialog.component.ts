@@ -23,9 +23,6 @@ export class FluxDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.conversationKeys = Object.keys(this.conversations);
-    console.log('conversationKeys', this.conversationKeys);
-    
   }
 
   ngOnChanges(){
@@ -42,6 +39,9 @@ export class FluxDialogComponent implements OnInit {
   }
 
   RefreshCharacters(){
+    this.conversationKeys = Object.keys(this.conversations);
+    console.log('conversationKeys', this.conversationKeys);
+    
     this.availableCharacters = [];
     let characterProps = Object.keys(this.conversations);
     for (let prop of characterProps) { 
