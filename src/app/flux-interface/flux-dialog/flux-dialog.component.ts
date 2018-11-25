@@ -76,6 +76,12 @@ export class FluxDialogComponent implements OnInit {
     
   }
 
+  FormatContent(contentcopy: string){
+    contentcopy = contentcopy.replace(/(?:\r\n|\r|\n)/g, '<br>');
+
+    return contentcopy;
+  }
+
   // SetActiveCharacter(alias: string){
   //   this.selectedCharacter = alias;
   //   this.RefreshDialog();
