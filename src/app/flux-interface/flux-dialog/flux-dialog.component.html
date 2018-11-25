@@ -20,8 +20,8 @@
             (click)="SetDialogNode(conversationKey, child)"
           >{{child.label}}</button>
           <button mat-flat-button
-            *ngIf="conversationKey !== 'narrator' && !conversations[conversationKey].active.children"
-            (click)="ReloadDialog(conversations[conversationKey].active.actions)">Exit</button>
+            *ngIf="conversationKey !== 'narrator' && !conversations[conversationKey].active.children && conversations[conversationKey].children"
+            (click)="ReloadDialog()">Continue</button>
         </div>
       </div>
     </mat-tab>

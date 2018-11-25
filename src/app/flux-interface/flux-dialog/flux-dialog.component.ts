@@ -12,6 +12,7 @@ export class FluxDialogComponent implements OnInit {
 
   @Input() conversations;
   @Output() conversationExit = new EventEmitter();
+  @Output() onAction = new EventEmitter();
   selectedCharacter: string;
   selectedTab: number;
   activeDialog: Dialog;
@@ -29,16 +30,19 @@ export class FluxDialogComponent implements OnInit {
 
   ngOnChanges(){
     console.log('NG ON CHANGES');
-    this.selectedCharacter = 'narrator';
-    this.RefreshDialog();
+    //this.selectedCharacter = 'narrator';
+    //this.RefreshDialog();
     this.RefreshCharacters();
   }
 
-  ReloadDialog(actions){
-    this.SetActiveCharacter('narrator');
-    this.selectedTab = 0;
-    // TODO: Trigger a tree reload
-    this.conversationExit.emit(actions);
+  // ReloadDialog(actions){
+  //   this.SetActiveCharacter('narrator');
+  //   this.selectedTab = 0;
+  //   this.RefreshDialog();
+  // }
+
+  ReloadDialog(){
+    this.conversationExit.emit();
   }
 
   RefreshCharacters(){
@@ -54,22 +58,27 @@ export class FluxDialogComponent implements OnInit {
     }
   }
 
-  RefreshDialog(){
-    this.activeDialog = <Dialog>{};
-    // Get active dialog
-    if(this.conversations.hasOwnProperty(this.selectedCharacter)){
-      this.activeDialog = this.conversations[this.selectedCharacter];
-    }
-  }
+  // RefreshDialog(){
+  //   this.activeDialog = <Dialog>{};
+  //   // Get active dialog
+  //   if(this.conversations.hasOwnProperty(this.selectedCharacter)){
+  //     this.activeDialog = this.conversations[this.selectedCharacter];
+  //   }
+  // }
 
   SetDialogNode(conversationKey: string, node: Dialog){
     //this.activeDialog = node;
     this.conversations[conversationKey].active = node;
+
+    if(this.conversations[conversationKey].active.actions){
+      this.onAction.emit(this.conversations[conversationKey].active.actions);
+    }
+    
   }
 
-  SetActiveCharacter(alias: string){
-    this.selectedCharacter = alias;
-    this.RefreshDialog();
-  }
+  // SetActiveCharacter(alias: string){
+  //   this.selectedCharacter = alias;
+  //   this.RefreshDialog();
+  // }
 
 }
