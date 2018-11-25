@@ -4,7 +4,7 @@
             {{currentScene.location.label}}
         </mat-card-title>
         <mat-card-content class="stage">
-            <flux-dialog [conversations]="currentScene.conversations" (conversationExit)="HandleAction($event)"></flux-dialog>
+            <flux-dialog [conversations]="currentScene.conversations" (conversationExit)="EndConversation($event)" (onAction)="HandleAction($event)"></flux-dialog>
         </mat-card-content>
         <mat-card-actions>
             <button mat-raised-button color="primary"

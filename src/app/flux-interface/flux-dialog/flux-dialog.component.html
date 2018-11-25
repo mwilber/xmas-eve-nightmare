@@ -2,7 +2,7 @@
         (click)="SetActiveCharacter(character.alias)" -->
 
 <div class="dialog-component">
-  <mat-tab-group class="character-list"  color="accent" [selectedIndex]="0">
+  <mat-tab-group class="character-list"  color="accent" [(selectedIndex)]="selectedTab">
     <mat-tab *ngFor="let conversationKey of conversationKeys">
       <ng-template mat-tab-label>
         <mat-icon *ngIf="dialogService.GetCharacter(conversationKey).icon === 'narrator'">notes</mat-icon>  
@@ -11,17 +11,15 @@
         &nbsp;{{dialogService.GetCharacter(conversationKey).label}}
       </ng-template>
       <div class="dialog-content" *ngIf="conversations[conversationKey].active.hasOwnProperty('content')">
-        <p>
-          {{conversations[conversationKey].active.content}}
-        </p>
+        <div class="dialog-copy" [innerHTML]="FormatContent(conversations[conversationKey].active.content)"></div>
         <div class="dialog-actions">
           <button mat-flat-button
             *ngFor="let child of conversations[conversationKey].active.children"
             (click)="SetDialogNode(conversationKey, child)"
           >{{child.label}}</button>
           <button mat-flat-button
-            *ngIf="conversationKey !== 'narrator' && !conversations[conversationKey].active.children"
-            (click)="ReloadDialog(conversations[conversationKey].active.actions)">Exit</button>
+            *ngIf="conversationKey !== 'narrator' && !conversations[conversationKey].active.children && conversations[conversationKey].children"
+            (click)="ReloadDialog()">Continue</button>
         </div>
       </div>
     </mat-tab>
