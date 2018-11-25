@@ -33,6 +33,7 @@ export class FluxDialogComponent implements OnInit {
     //this.selectedCharacter = 'narrator';
     //this.RefreshDialog();
     this.RefreshCharacters();
+    this.selectedTab = 0;
   }
 
   // ReloadDialog(actions){
