@@ -1,7 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 import { NgForm } from '@angular/forms';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app'
+import 'firebase/auth'
 import { AuthService } from 'src/app/flux-engine/services/auth.service';
 
 @Component({
