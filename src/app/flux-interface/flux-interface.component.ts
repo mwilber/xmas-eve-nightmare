@@ -70,6 +70,9 @@ export class FluxInterfaceComponent implements OnInit {
         this.userService.ProcessAction(action);
       }
     }
+  }
+
+  EndConversation(){
     this.LoadScene(this.userService.GetLocation());
   }
 

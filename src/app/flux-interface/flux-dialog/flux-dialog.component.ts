@@ -12,7 +12,9 @@ export class FluxDialogComponent implements OnInit {
 
   @Input() conversations;
   @Output() conversationExit = new EventEmitter();
+  @Output() onAction = new EventEmitter();
   selectedCharacter: string;
+  selectedTab: number;
   activeDialog: Dialog;
   availableCharacters: Character[];
   conversationKeys: string[];
@@ -20,6 +22,7 @@ export class FluxDialogComponent implements OnInit {
   constructor(private dialogService: DialogService) {
     this.selectedCharacter = '';
     this.activeDialog = null;
+    this.selectedTab = 0;
   }
 
   ngOnInit() {
@@ -27,15 +30,19 @@ export class FluxDialogComponent implements OnInit {
 
   ngOnChanges(){
     console.log('NG ON CHANGES');
-    this.selectedCharacter = 'narrator';
-    this.RefreshDialog();
+    //this.selectedCharacter = 'narrator';
+    //this.RefreshDialog();
     this.RefreshCharacters();
   }
 
-  ReloadDialog(actions){
-    this.SetActiveCharacter('narrator');
-    // TODO: Trigger a tree reload
-    this.conversationExit.emit(actions);
+  // ReloadDialog(actions){
+  //   this.SetActiveCharacter('narrator');
+  //   this.selectedTab = 0;
+  //   this.RefreshDialog();
+  // }
+
+  ReloadDialog(){
+    this.conversationExit.emit();
   }
 
   RefreshCharacters(){
@@ -51,22 +58,33 @@ export class FluxDialogComponent implements OnInit {
     }
   }
 
-  RefreshDialog(){
-    this.activeDialog = <Dialog>{};
-    // Get active dialog
-    if(this.conversations.hasOwnProperty(this.selectedCharacter)){
-      this.activeDialog = this.conversations[this.selectedCharacter];
-    }
-  }
+  // RefreshDialog(){
+  //   this.activeDialog = <Dialog>{};
+  //   // Get active dialog
+  //   if(this.conversations.hasOwnProperty(this.selectedCharacter)){
+  //     this.activeDialog = this.conversations[this.selectedCharacter];
+  //   }
+  // }
 
   SetDialogNode(conversationKey: string, node: Dialog){
     //this.activeDialog = node;
     this.conversations[conversationKey].active = node;
+
+    if(this.conversations[conversationKey].active.actions){
+      this.onAction.emit(this.conversations[conversationKey].active.actions);
+    }
+    
   }
 
-  SetActiveCharacter(alias: string){
-    this.selectedCharacter = alias;
-    this.RefreshDialog();
+  FormatContent(contentcopy: string){
+    contentcopy = contentcopy.replace(/(?:\r\n|\r|\n)/g, '<br>');
+
+    return contentcopy;
   }
+
+  // SetActiveCharacter(alias: string){
+  //   this.selectedCharacter = alias;
+  //   this.RefreshDialog();
+  // }
 
 }
