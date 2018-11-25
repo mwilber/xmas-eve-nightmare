@@ -36,12 +36,6 @@ export class FluxDialogComponent implements OnInit {
     this.selectedTab = 0;
   }
 
-  // ReloadDialog(actions){
-  //   this.SetActiveCharacter('narrator');
-  //   this.selectedTab = 0;
-  //   this.RefreshDialog();
-  // }
-
   ReloadDialog(){
     this.conversationExit.emit();
   }
@@ -59,16 +53,7 @@ export class FluxDialogComponent implements OnInit {
     }
   }
 
-  // RefreshDialog(){
-  //   this.activeDialog = <Dialog>{};
-  //   // Get active dialog
-  //   if(this.conversations.hasOwnProperty(this.selectedCharacter)){
-  //     this.activeDialog = this.conversations[this.selectedCharacter];
-  //   }
-  // }
-
   SetDialogNode(conversationKey: string, node: Dialog){
-    //this.activeDialog = node;
     this.conversations[conversationKey].active = node;
 
     if(this.conversations[conversationKey].active.actions){
@@ -82,10 +67,5 @@ export class FluxDialogComponent implements OnInit {
 
     return contentcopy;
   }
-
-  // SetActiveCharacter(alias: string){
-  //   this.selectedCharacter = alias;
-  //   this.RefreshDialog();
-  // }
 
 }
