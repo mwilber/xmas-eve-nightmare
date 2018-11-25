@@ -4,7 +4,7 @@ import { Location } from 'src/app/flux-engine/interfaces/location';
 import { DialogService } from 'src/app/flux-engine/services/dialog.service';
 import { Character } from 'src/app/flux-engine/interfaces/character';
 import { LocalStorage } from 'ngx-store';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 import { AuthService } from 'src/app/flux-engine/services/auth.service';
 import {MatDialog} from '@angular/material';
 import {FluxAuthComponent} from 'src/app/flux-editor/flux-edit/flux-auth/flux-auth.component';

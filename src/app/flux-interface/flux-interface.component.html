@@ -10,7 +10,7 @@
             <button mat-raised-button color="primary"
                 *ngFor="let alias of currentScene.location.adjacentLocations"
                 (click)="LoadScene(alias)"
-            >{{alias}}</button>
+            ><mat-icon>exit_to_app</mat-icon>&nbsp;&nbsp;{{locationService.GetLocation(alias).label}}</button>
         </mat-card-actions>
     </mat-card>
     
