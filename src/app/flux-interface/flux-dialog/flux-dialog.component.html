@@ -11,7 +11,7 @@
         &nbsp;{{dialogService.GetCharacter(conversationKey).label}}
       </ng-template>
       <div class="dialog-content" *ngIf="conversations[conversationKey].active.hasOwnProperty('content')">
-        <div class="dialog-copy" [innerHTML]="conversations[conversationKey].active.content"></div>
+        <div class="dialog-copy" [innerHTML]="FormatContent(conversations[conversationKey].active.content)"></div>
         <div class="dialog-actions">
           <button mat-flat-button
             *ngFor="let child of conversations[conversationKey].active.children"
