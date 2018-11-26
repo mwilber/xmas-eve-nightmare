@@ -1,4 +1,4 @@
-<div class="flux-interface container theme-night" fxLayout="column" fxLayout.xs="column" fxLayoutGap="0.5%"  fxLayoutAlign="center">
+<div class="flux-interface container" [ngClass]="'theme-' + currentScene.location.theme" fxLayout="column" fxLayout.xs="column" fxLayoutGap="0.5%"  fxLayoutAlign="center">
     <mat-card  *ngIf="currentScene.location; else noData">
         <mat-card-title class="location label">
             {{currentScene.location.label}}
