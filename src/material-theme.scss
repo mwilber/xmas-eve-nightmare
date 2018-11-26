@@ -44,11 +44,22 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 
 .theme-night{
     .mat-card{
-        background: #121233;
+        background: #040B0A;
         
     }
     .mat-tab-label-content,
     .mat-card-title{
-        color: #eec;
+        color: #fbfaf0;
+    }
+}
+
+.theme-drivehome{
+    .mat-card{
+        background: #09091b;
+        
+    }
+    .mat-tab-label-content,
+    .mat-card-title{
+        color: #fffdd8;
     }
 }
