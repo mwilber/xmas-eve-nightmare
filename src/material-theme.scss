@@ -29,3 +29,26 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
     border: 1px solid mat-color($candy-app-accent, 200);
     background: mat-color($candy-app-accent, 50);
 }
+
+/* Location Themes */
+.theme-dark{
+    .mat-card{
+        background: #232323;
+        
+    }
+    .mat-tab-label-content,
+    .mat-card-title{
+        color: #ccc;
+    }
+}
+
+.theme-night{
+    .mat-card{
+        background: #121233;
+        
+    }
+    .mat-tab-label-content,
+    .mat-card-title{
+        color: #eec;
+    }
+}
