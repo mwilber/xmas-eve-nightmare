@@ -63,3 +63,14 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
         color: #fffdd8;
     }
 }
+
+.theme-xmaslights{
+    .mat-card{
+        background: #09091b url(./assets/lights.jpg) center repeat;
+        
+    }
+    .mat-tab-label-content,
+    .mat-card-title{
+        color: #fff;
+    }
+}
