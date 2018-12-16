@@ -23,6 +23,8 @@ export class UserService {
         break;
       case 'prestige':
         this.prestige += +action.prop;
+      case 'teleport':
+        this.SetLocation(action.prop);
       default:
         break;
     }
