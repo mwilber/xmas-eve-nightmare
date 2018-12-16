@@ -68,6 +68,10 @@ export class FluxInterfaceComponent implements OnInit {
     if(actions){
       for( let action of actions){
         this.userService.ProcessAction(action);
+        // Force a scene reload when teleporting
+        if(action.name === 'teleport'){
+          this.EndConversation();
+        }
       }
     }
   }
