@@ -1,0 +1,9 @@
+{
+    "name": "FLUX Interactive Fiction Engine",
+    "short_name": "FLUX",
+    "theme_color": "#f44336",
+    "background_color": "#eeeeee",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/"
+  }
