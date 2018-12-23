@@ -1,6 +1,6 @@
 self.addEventListener('install', function(event){
     console.log('[SW] installing...');
-    event.waitUntil(caches.open('static')
+    event.waitUntil(caches.open('static_v2')
         .then(function(cache){
             console.log('[SW] precaching');
             cache.addAll([
