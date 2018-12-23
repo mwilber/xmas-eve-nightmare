@@ -8,15 +8,20 @@
     margin-right: 8px;
 }
 
+.dialog-copy{
+    margin-bottom: 3rem;
+    line-height: 2;
+}
+
 .dialog-copy.character:before,
 .dialog-copy.character:after{
     content: '\E244';
-    opacity: 0.7;
+    opacity: 0.5;
     transform:rotate(-180deg);
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
-    font-size: 24px;
+    font-size: 2rem;
     line-height: 1;
     letter-spacing: normal;
     text-transform: none;
@@ -29,10 +34,9 @@
     background-repeat: no-repeat;
     display: inline-block;
     fill: currentColor;
-    height: 24px;
-    width: 24px;
 }
 
 .dialog-copy.character:after{
     transform: none;
+    line-height: 0;
 }

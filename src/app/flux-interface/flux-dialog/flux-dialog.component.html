@@ -16,7 +16,11 @@
           <button mat-flat-button
             *ngFor="let child of conversations[conversationKey].active.children"
             (click)="SetDialogNode(conversationKey, child)"
-          >{{child.label}}</button>
+          >
+            <mat-icon *ngIf="dialogService.GetCharacter(conversationKey).icon === 'character'">chat</mat-icon>
+            <mat-icon *ngIf="dialogService.GetCharacter(conversationKey).icon === 'prop'">pan_tool</mat-icon>
+            &nbsp;{{child.label}}
+          </button>
           <button mat-flat-button
             *ngIf="conversationKey !== 'narrator' && !conversations[conversationKey].active.children && conversations[conversationKey].children"
             (click)="ReloadDialog()">Continue</button>
