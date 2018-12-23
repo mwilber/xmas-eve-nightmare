@@ -8,7 +8,10 @@
         <mat-icon *ngIf="dialogService.GetCharacter(conversationKey).icon === 'narrator'">notes</mat-icon>  
         <mat-icon *ngIf="dialogService.GetCharacter(conversationKey).icon === 'character'">person</mat-icon>
         <mat-icon *ngIf="dialogService.GetCharacter(conversationKey).icon === 'prop'">search</mat-icon>
-        &nbsp;{{dialogService.GetCharacter(conversationKey).label}}
+        &nbsp;
+        <span *ngIf="dialogService.GetCharacter(conversationKey).icon !== 'narrator'">
+          {{dialogService.GetCharacter(conversationKey).label}}
+        </span>
       </ng-template>
       <div class="dialog-content"  *ngIf="conversations[conversationKey].active.hasOwnProperty('content')">
         <div class="dialog-copy" [ngClass]="dialogService.GetCharacter(conversationKey).icon" [innerHTML]="FormatContent(conversations[conversationKey].active.content)"></div>
