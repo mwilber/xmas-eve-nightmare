@@ -97,7 +97,7 @@ export class FluxInterfaceComponent implements OnInit {
     // if(this.dialogComponant){
     //   this.dialogComponant.Refresh();
     // }
-
+    window.scroll(0,0);
     console.log('currentScene', alias, this.currentScene);
   }
 
