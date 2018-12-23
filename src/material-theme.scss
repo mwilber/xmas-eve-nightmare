@@ -159,3 +159,41 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
         color: #fff;
     }
 }
+
+.theme-blizzard{
+    .mat-card{
+        background: transparent;
+        position: relative;
+        overflow: hidden;
+        &:before{
+            content: ' ';
+            display: block;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: #09091b url(./assets/blizzard.png) center repeat;
+        }
+        &:after{
+            content: ' ';
+            display: block;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: -moz-linear-gradient(-45deg, rgba(9,9,27,1) 0%, rgba(9,9,27,0) 100%);
+            background: -webkit-linear-gradient(-45deg, rgba(9,9,27,1) 0%,rgba(9,9,27,0) 100%);
+            background: linear-gradient(135deg, rgba(9,9,27,1) 0%,rgba(9,9,27,0) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#09091b', endColorstr='#0009091b',GradientType=1 );
+
+        }
+        
+    }
+    .mat-card-title{
+        color: #fff;
+    }
+}
