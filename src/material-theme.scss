@@ -23,6 +23,20 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 // that you are using.
 @include angular-material-theme($candy-app-theme);
 
+.dialog-component{
+
+    .mat-tab-label, .mat-tab-link {
+        color: rgba(0, 0, 0, 0.87);
+        background: rgba(232, 245,233,0.75);
+    }
+
+    .mat-tab-label-active, .mat-tab-link-active {
+        color: rgba(0, 0, 0, 0.87);
+        background: rgba(232, 245,233,1);
+        opacity: 1;
+    }
+
+}
 
 .dialog-content{
     padding: 20px;
@@ -36,7 +50,6 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
         background: #232323;
         
     }
-    .mat-tab-label-content,
     .mat-card-title{
         color: #ccc;
     }
@@ -47,7 +60,6 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
         background: #040B0A;
         
     }
-    .mat-tab-label-content,
     .mat-card-title{
         color: #fbfaf0;
     }
@@ -58,7 +70,6 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
         background: #09091b;
         
     }
-    .mat-tab-label-content,
     .mat-card-title{
         color: #fffdd8;
     }
@@ -66,10 +77,37 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 
 .theme-xmaslights{
     .mat-card{
-        background: #09091b url(./assets/lights.jpg) center repeat;
+        background: transparent;
+        position: relative;
+        overflow: hidden;
+        &:before{
+            content: ' ';
+            display: block;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: #09091b url(./assets/lights.jpg) center repeat;
+        }
+        &:after{
+            content: ' ';
+            display: block;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: -moz-linear-gradient(-45deg, rgba(9,9,27,1) 0%, rgba(9,9,27,0) 100%);
+            background: -webkit-linear-gradient(-45deg, rgba(9,9,27,1) 0%,rgba(9,9,27,0) 100%);
+            background: linear-gradient(135deg, rgba(9,9,27,1) 0%,rgba(9,9,27,0) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#09091b', endColorstr='#0009091b',GradientType=1 );
+
+        }
         
     }
-    .mat-tab-label-content,
     .mat-card-title{
         color: #fff;
     }
