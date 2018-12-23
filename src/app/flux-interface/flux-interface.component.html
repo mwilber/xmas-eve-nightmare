@@ -6,7 +6,7 @@
         <mat-card-content class="stage">
             <flux-dialog [conversations]="currentScene.conversations" (conversationExit)="EndConversation($event)" (onAction)="HandleAction($event)"></flux-dialog>
         </mat-card-content>
-        <mat-card-actions>
+        <mat-card-actions *ngIf="currentScene.location.hasOwnProperty('adjacentLocations')">
             <button mat-raised-button color="primary"
                 *ngFor="let alias of currentScene.location.adjacentLocations"
                 (click)="LoadScene(alias)"
