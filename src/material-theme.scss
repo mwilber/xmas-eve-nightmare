@@ -23,11 +23,26 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 // that you are using.
 @include angular-material-theme($candy-app-theme);
 
+.mat-card-title{
+    margin: 0.25em 0 1em 0 !important;
+    line-height: 1;
+}
+
+.mat-card-content{
+    margin: 0 !important;
+}
+
+.mat-card-actions {
+    margin:0 !important;
+    background: rgba(mat-color($candy-app-accent, 50),0.75);
+    padding: 20px !important;
+}
+
 .dialog-component{
 
     .mat-tab-label, .mat-tab-link {
         color: rgba(0, 0, 0, 0.87);
-        background: rgba(232, 245,233,0.75);
+        background: rgba(mat-color($candy-app-accent, 50),0.75);
         -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */
@@ -39,7 +54,7 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 
     .mat-tab-label-active, .mat-tab-link-active {
         color: rgba(0, 0, 0, 0.87);
-        background: rgba(232, 245,233,1);
+        background: rgba(mat-color($candy-app-accent, 50),1);
         opacity: 1;
     }
 
