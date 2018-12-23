@@ -6,6 +6,8 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
+$break-small: 768px;
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
@@ -36,11 +38,20 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
     margin:0 !important;
     background: rgba(mat-color($candy-app-accent, 50),0.75);
     padding: 20px !important;
+    
+    button{
+        @media screen and (max-width: $break-small) {
+            width: 100%;
+            float: none;
+            text-align: left;
+            margin: 0.75em 0 !important;
+        }
+    }
 }
 
 .dialog-component{
 
-    .mat-tab-label, .mat-tab-link {
+    .mat-tab-label, .mat-tab-link, .mat-tab-header-pagination {
         color: rgba(0, 0, 0, 0.87);
         background: rgba(mat-color($candy-app-accent, 50),0.75);
         -webkit-touch-callout: none; /* iOS Safari */
@@ -64,6 +75,20 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
     padding: 20px;
     border: 1px solid mat-color($candy-app-accent, 200);
     background: mat-color($candy-app-accent, 50);
+}
+
+.dialog-actions{
+    button{
+        @media screen and (max-width: $break-small) {
+            width: 100%;
+            float: none;
+            text-align: left;
+            white-space: normal;
+            margin-bottom: 1em;
+            line-height: 1;
+            padding: 10px 16px;
+        }
+    }
 }
 
 /* Location Themes */
