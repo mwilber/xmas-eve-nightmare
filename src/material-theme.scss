@@ -28,6 +28,13 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
     .mat-tab-label, .mat-tab-link {
         color: rgba(0, 0, 0, 0.87);
         background: rgba(232, 245,233,0.75);
+        -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
     }
 
     .mat-tab-label-active, .mat-tab-link-active {
