@@ -202,3 +202,41 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
         color: #fff;
     }
 }
+
+.theme-basement{
+    .mat-card{
+        background: transparent;
+        position: relative;
+        overflow: hidden;
+        &:before{
+            content: ' ';
+            display: block;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: #1b1409 url(./assets/bricks.jpg) center repeat;
+        }
+        &:after{
+            content: ' ';
+            display: block;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: -moz-linear-gradient(-45deg, rgba(27,20,9,1) 0%, rgba(27,20,9,0) 100%);
+            background: -webkit-linear-gradient(-45deg, rgba(27,20,9,1) 0%,rgba(27,20,9,0) 100%);
+            background: linear-gradient(135deg, rgba(27,20,9,1) 0%,rgba(27,20,9,0) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1b1409', endColorstr='#1b1409',GradientType=1 );
+
+        }
+        
+    }
+    .mat-card-title{
+        color: #fff;
+    }
+}
